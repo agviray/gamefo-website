@@ -1,12 +1,17 @@
+import React from 'react';
 import GlobalStyles from '../components/styles/GlobalStyles';
+import SearchBar from './SearchBar';
 
-function App() {
+const App = () => {
+  console.log('App refereshed!');
   return (
     <>
       <GlobalStyles />
-      <div>Hello</div>
+      <div className="appContainer">
+        <SearchBar />
+      </div>
     </>
   );
-}
+};
 
 export default App;
