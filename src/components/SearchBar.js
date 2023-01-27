@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-const SearchBar = () => {
+const SearchBar = ({ onTermSubmit }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Send request to an api?
+    onTermSubmit(searchTerm);
   };
 
   const onInputChange = (e) => {
