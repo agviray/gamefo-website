@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import GlobalStyles from '../components/styles/GlobalStyles';
 import Layout from './Layout';
+import HomePage from './HomePage';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import axios from 'axios';
@@ -23,8 +25,14 @@ const App = () => {
     <>
       <GlobalStyles />
       <Layout>
-        <SearchBar onTermSubmit={updateResults} />
-        <SearchResults />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/search"
+            element={<SearchBar onTermSubmit={updateResults} />}
+          />
+          <Route path="/results" element={<SearchResults />} />
+        </Routes>
       </Layout>
     </>
   );
