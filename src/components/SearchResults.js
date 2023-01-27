@@ -1,20 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const SearchResults = () => {
-  const temporaryResults = [
-    'Result 1',
-    'Result 2',
-    'Result 3',
-    'Result 4',
-    'Result 5',
-  ];
-  const renderedItems = temporaryResults.map((result, index) => (
+const SearchResults = ({ results }) => {
+  useEffect(() => {
+    console.log(`SearchResults says: ${JSON.stringify(results)}`);
+  }, [results]);
+
+  const renderedItems = results.map((result, index) => (
     <div key={index} className="resultItem">
-      {result}
+      <img src={result.background_image} alt="" />
     </div>
   ));
 
-  return (
+  return results.length === 0 ? null : (
     <div className="container">
       <div className="content">
         <div className="resultsList">{renderedItems}</div>

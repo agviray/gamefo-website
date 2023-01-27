@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import SearchResults from './SearchResults';
 
-const SearchBar = ({ onTermSubmit }) => {
+const SearchBar = ({ results, onResultsChange }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onTermSubmit(searchTerm);
+    onResultsChange(searchTerm);
   };
 
   const onInputChange = (e) => {
@@ -25,6 +26,7 @@ const SearchBar = ({ onTermSubmit }) => {
             value={searchTerm}
           />
         </form>
+        <SearchResults results={results} />
       </div>
     </div>
   );

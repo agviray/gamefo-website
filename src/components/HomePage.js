@@ -1,11 +1,12 @@
 import React from 'react';
+import SearchResults from './SearchResults';
 
-const HomePage = () => {
+const HomePage = ({ results }) => {
   return (
     <div className="container">
       <div className="content">
         <h2>Home Page</h2>
-        <p>This will show top games</p>
+        <SearchResults results={results} />
       </div>
     </div>
   );
