@@ -5,6 +5,7 @@ import Layout from './Layout';
 import HomePage from './HomePage';
 import SearchBar from './SearchBar';
 import GameDetails from './GameDetails';
+import NotFoundPage from './NotFound';
 
 const App = () => {
   const [results, setResults] = useState([]);
@@ -21,20 +22,19 @@ const App = () => {
   };
 
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage results={results} />} />
-          <Route
-            path="/search"
-            element={
-              <SearchBar results={results} onResultsChange={updateResults} />
-            }
-          />
-          <Route path="/details/:name" element={<GameDetails />} />
-        </Route>
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage results={results} />} />
+        <Route
+          path="/search"
+          element={
+            <SearchBar results={results} onResultsChange={updateResults} />
+          }
+        />
+        <Route path="/details/:name" element={<GameDetails />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   );
 };
 
