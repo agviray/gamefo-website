@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
-import GlobalStyles from '../components/styles/GlobalStyles';
 import Layout from './Layout';
 import HomePage from './HomePage';
 import SearchBar from './SearchBar';
@@ -23,10 +22,9 @@ const App = () => {
 
   return (
     <>
-      <GlobalStyles />
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage results={results} />} />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage results={results} />} />
           <Route
             path="/search"
             element={
@@ -34,8 +32,8 @@ const App = () => {
             }
           />
           <Route path="/details/:name" element={<GameDetails />} />
-        </Routes>
-      </Layout>
+        </Route>
+      </Routes>
     </>
   );
 };

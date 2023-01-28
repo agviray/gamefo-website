@@ -1,4 +1,6 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
+import GlobalStyles from '../components/styles/GlobalStyles';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
@@ -16,19 +18,24 @@ const StyledMainContent = styled.div`
   padding: 100px 20px;
 `;
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
-    <StyledWrapper>
-      <header>
-        <h1>Game-Fo</h1>
-      </header>
-      <main>
-        <StyledMainContent>{children}</StyledMainContent>
-      </main>
-      <footer>
-        <span>&copy; footer content</span>
-      </footer>
-    </StyledWrapper>
+    <>
+      <GlobalStyles />
+      <StyledWrapper>
+        <header>
+          <h1>Game-Fo</h1>
+        </header>
+        <main>
+          <StyledMainContent>
+            <Outlet />
+          </StyledMainContent>
+        </main>
+        <footer>
+          <span>&copy; footer content</span>
+        </footer>
+      </StyledWrapper>
+    </>
   );
 };
 
