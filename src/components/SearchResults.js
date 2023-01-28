@@ -1,5 +1,13 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const StyledImageContainer = styled.div`
+  width: 100%;
+  img {
+    max-width: 100%;
+  }
+`;
 
 const SearchResults = ({ results }) => {
   useEffect(() => {
@@ -14,7 +22,9 @@ const SearchResults = ({ results }) => {
           selectedGame: result,
         }}
       >
-        <img src={result.background_image} alt={`${result.name}`} />
+        <StyledImageContainer>
+          <img src={result.background_image} alt={`${result.name}`} />
+        </StyledImageContainer>
       </Link>
     </div>
   ));
