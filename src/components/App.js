@@ -33,7 +33,7 @@ const App = () => {
               <SearchBar results={results} onResultsChange={updateResults} />
             }
           />
-          <Route path="/details" element={<GameDetails />} />
+          <Route path="/details/:name" element={<GameDetails />} />
         </Routes>
       </Layout>
     </>

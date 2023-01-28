@@ -1,13 +1,21 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const SearchResults = ({ results }) => {
   useEffect(() => {
     // console.log(`SearchResults says: ${JSON.stringify(results)}`);
   }, [results]);
 
-  const renderedItems = results.map((result, index) => (
-    <div key={index} className="resultItem">
-      <img src={result.background_image} alt="" />
+  const renderedItems = results.map((result) => (
+    <div key={result.id} className="resultItem">
+      <Link
+        to={`/details/${result.name}`}
+        state={{
+          selectedGame: result,
+        }}
+      >
+        <img src={result.background_image} alt={`${result.name}`} />
+      </Link>
     </div>
   ));
 
