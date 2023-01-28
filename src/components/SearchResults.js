@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 const SearchResults = ({ results }) => {
   useEffect(() => {
-    console.log(`SearchResults says: ${JSON.stringify(results)}`);
+    // console.log(`SearchResults says: ${JSON.stringify(results)}`);
   }, [results]);
 
   const renderedItems = results.map((result, index) => (

@@ -5,6 +5,7 @@ import GlobalStyles from '../components/styles/GlobalStyles';
 import Layout from './Layout';
 import HomePage from './HomePage';
 import SearchBar from './SearchBar';
+import GameDetails from './GameDetails';
 
 const App = () => {
   const [results, setResults] = useState([]);
@@ -32,6 +33,7 @@ const App = () => {
               <SearchBar results={results} onResultsChange={updateResults} />
             }
           />
+          <Route path="/details" element={<GameDetails />} />
         </Routes>
       </Layout>
     </>
