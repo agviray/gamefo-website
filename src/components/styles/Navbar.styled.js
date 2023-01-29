@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 export const StyledNavContent = styled.div`
   .headingBlock {
+    padding-bottom: 3rem;
   }
 
   .searchBlock {
     display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
     width: 100%;
-    padding-top: 2rem;
 
     div {
       display: flex;

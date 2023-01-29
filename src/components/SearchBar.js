@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SearchResults from './SearchResults';
+import { StyledContent } from './styles/SearchBar.styled';
+import magnifyingGlass from '../assets/magnifying-glass.svg';
 
 const SearchBar = ({ results, onResultsChange }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,21 +16,25 @@ const SearchBar = ({ results, onResultsChange }) => {
   };
 
   return (
-    <div className="container">
-      <div className="content">
+    <>
+      <StyledContent>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="SearchInput">Search</label>
-          <input
-            onChange={onInputChange}
-            id="SearchInput"
-            type="text"
-            placeholder="Search something"
-            value={searchTerm}
-          />
+          <div className="formContent">
+            <label htmlFor="SearchInput">Search</label>
+            <img src={magnifyingGlass} alt="magnifying glass" />
+            <input
+              onChange={onInputChange}
+              id="SearchInput"
+              type="text"
+              placeholder="Looking for something?"
+              value={searchTerm}
+              autoFocus
+            />
+          </div>
         </form>
         <SearchResults results={results} />
-      </div>
-    </div>
+      </StyledContent>
+    </>
   );
 };
 
