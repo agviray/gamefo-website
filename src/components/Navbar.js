@@ -1,12 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { StyledNavContent } from './styles/Navbar.styled';
 import magnifyingGlass from '../assets/magnifying-glass.svg';
 
 const Navbar = () => {
+  const [isHidden, setIsHidden] = useState(false);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname !== '/search') {
+      setIsHidden(false);
+    } else {
+      setIsHidden(true);
+    }
+  }, [pathname]);
+
   return (
     <nav>
-      <StyledNavContent>
+      <StyledNavContent isHidden={isHidden}>
         <div className="headingBlock">
           <Link to="/">
             <h1>
