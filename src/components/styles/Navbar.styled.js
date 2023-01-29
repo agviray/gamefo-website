@@ -10,11 +10,10 @@ export const StyledNavContent = styled.div`
   }
 
   .searchBlock {
-    display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
     width: 100%;
 
     .searchBlockContent {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       width: 80%;
       margin: 0 auto;

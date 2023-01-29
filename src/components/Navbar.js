@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { StyledNavContent } from './styles/Navbar.styled';
+import SearchBar from './SearchBar';
 import MagnifyingGlass from './MagnifyingGlass';
 
-const Navbar = () => {
+const Navbar = ({ onResultsChange }) => {
   const [isHidden, setIsHidden] = useState(false);
   const { pathname } = useLocation();
 
@@ -17,7 +18,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <StyledNavContent isHidden={isHidden}>
+      <StyledNavContent>
         <div className="headingBlock">
           <Link to="/">
             <h1>
@@ -25,16 +26,20 @@ const Navbar = () => {
             </h1>
           </Link>
         </div>
-        <div className="searchBlock">
-          <Link to="/search">
-            <div className={'searchBlockContent'}>
-              <div className={'magnifyingGlassContainer'}>
-                <MagnifyingGlass />
+        {isHidden ? (
+          <SearchBar onResultsChange={onResultsChange} />
+        ) : (
+          <div className="searchBlock">
+            <Link to="/search">
+              <div className={'searchBlockContent'}>
+                <div className={'magnifyingGlassContainer'}>
+                  <MagnifyingGlass />
+                </div>
+                <span>Looking for something?</span>
               </div>
-              <span>Looking for something?</span>
-            </div>
-          </Link>
-        </div>
+            </Link>
+          </div>
+        )}
       </StyledNavContent>
     </nav>
   );

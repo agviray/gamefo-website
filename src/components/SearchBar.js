@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import SearchResults from './SearchResults';
 import { StyledContent } from './styles/SearchBar.styled';
 import MagnifyingGlass from './MagnifyingGlass';
 
-const SearchBar = ({ results, onResultsChange }) => {
+const SearchBar = ({ onResultsChange }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [inputHasFocus, setInputHasFocus] = useState(true);
   const inputRef = useRef(null);
@@ -56,7 +55,6 @@ const SearchBar = ({ results, onResultsChange }) => {
             />
           </div>
         </form>
-        <SearchResults results={results} />
       </StyledContent>
     </>
   );

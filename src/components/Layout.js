@@ -17,13 +17,13 @@ const StyledMainContent = styled.div`
   margin-right: auto;
 `;
 
-const Layout = () => {
+const Layout = ({ onResultsChange }) => {
   return (
     <>
       <GlobalStyles />
       <StyledWrapper>
         <header>
-          <Navbar />
+          <Navbar onResultsChange={onResultsChange} />
         </header>
         <main>
           <StyledMainContent>

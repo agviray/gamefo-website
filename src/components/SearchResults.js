@@ -32,6 +32,7 @@ const SearchResults = ({ results }) => {
   return results.length === 0 ? null : (
     <div className="container">
       <div className="content">
+        <h2>Search Results</h2>
         <div className="resultsList">{renderedItems}</div>
       </div>
     </div>
