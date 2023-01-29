@@ -8,6 +8,7 @@ export const StyledContent = styled.div`
     width: 80%;
     margin: 0 auto;
     border: 1px solid #333333;
+    border-color: ${({ inputHasFocus }) => (inputHasFocus ? 'red' : '#333333')};
     border-radius: 40px;
     padding: 0.75rem 1rem;
     background-color: #ffffffff;
@@ -19,7 +20,7 @@ export const StyledContent = styled.div`
       overflow: hidden;
     }
 
-    img {
+    .magnifyingGlassContainer {
       max-width: 20px;
       max-height: 20px;
       margin-right: 1rem;

@@ -3,13 +3,17 @@ import styled from 'styled-components';
 export const StyledNavContent = styled.div`
   .headingBlock {
     padding-bottom: 3rem;
+
+    h1 {
+      display: inline-block;
+    }
   }
 
   .searchBlock {
     display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
     width: 100%;
 
-    div {
+    .searchBlockContent {
       display: flex;
       align-items: center;
       width: 80%;
@@ -19,7 +23,7 @@ export const StyledNavContent = styled.div`
       padding: 0.75rem 1rem;
       background-color: #ffffffff;
 
-      img {
+      .magnifyingGlassContainer {
         max-width: 20px;
         max-height: 20px;
         margin-right: 1rem;

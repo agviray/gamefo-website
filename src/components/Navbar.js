@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { StyledNavContent } from './styles/Navbar.styled';
-import magnifyingGlass from '../assets/magnifying-glass.svg';
+import MagnifyingGlass from './MagnifyingGlass';
 
 const Navbar = () => {
   const [isHidden, setIsHidden] = useState(false);
@@ -27,8 +27,10 @@ const Navbar = () => {
         </div>
         <div className="searchBlock">
           <Link to="/search">
-            <div>
-              <img src={magnifyingGlass} alt="magnifying glass" />
+            <div className={'searchBlockContent'}>
+              <div className={'magnifyingGlassContainer'}>
+                <MagnifyingGlass />
+              </div>
               <span>Looking for something?</span>
             </div>
           </Link>

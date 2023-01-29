@@ -1,10 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import SearchResults from './SearchResults';
 import { StyledContent } from './styles/SearchBar.styled';
-import magnifyingGlass from '../assets/magnifying-glass.svg';
+import MagnifyingGlass from './MagnifyingGlass';
 
 const SearchBar = ({ results, onResultsChange }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [inputHasFocus, setInputHasFocus] = useState(true);
+  const inputRef = useRef(null);
+  const formContentRef = useRef(null);
+
+  useEffect(() => {
+    const onBodyClick = () => {
+      return document.activeElement === inputRef.current
+        ? setInputHasFocus(true)
+        : setInputHasFocus(false);
+    };
+
+    document.body.addEventListener('click', onBodyClick);
+
+    return () => {
+      document.body.removeEventListener('click', onBodyClick);
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(inputHasFocus);
+  }, [inputHasFocus]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,12 +38,15 @@ const SearchBar = ({ results, onResultsChange }) => {
 
   return (
     <>
-      <StyledContent>
+      <StyledContent inputHasFocus={inputHasFocus}>
         <form onSubmit={handleSubmit}>
-          <div className="formContent">
+          <div ref={formContentRef} className="formContent">
             <label htmlFor="SearchInput">Search</label>
-            <img src={magnifyingGlass} alt="magnifying glass" />
+            <div className={'magnifyingGlassContainer'}>
+              <MagnifyingGlass color={`${inputHasFocus ? 'red' : '#333333'}`} />
+            </div>
             <input
+              ref={inputRef}
               onChange={onInputChange}
               id="SearchInput"
               type="text"
