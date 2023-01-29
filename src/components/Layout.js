@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import GlobalStyles from '../components/styles/GlobalStyles';
 import styled from 'styled-components';
-
+import Navbar from './Navbar';
 const StyledWrapper = styled.div`
   header,
   footer {
@@ -24,7 +24,7 @@ const Layout = () => {
       <GlobalStyles />
       <StyledWrapper>
         <header>
-          <h1>Game-Fo</h1>
+          <Navbar />
         </header>
         <main>
           <StyledMainContent>
