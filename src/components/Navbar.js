@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { StyledNavContent } from './styles/Navbar.styled';
+import { StyledContainer, StyledNavContent } from './styles/Navbar.styled';
 import SearchBar from './SearchBar';
 import MagnifyingGlass from './MagnifyingGlass';
 
@@ -17,31 +17,33 @@ const Navbar = ({ onResultsChange }) => {
   }, [pathname]);
 
   return (
-    <nav>
-      <StyledNavContent>
-        <div className="headingBlock">
-          <Link to="/">
-            <h1>
-              <span>Game-Fo</span>
-            </h1>
-          </Link>
-        </div>
-        {isHidden ? (
-          <SearchBar onResultsChange={onResultsChange} />
-        ) : (
-          <div className="searchBlock">
-            <Link to="/search">
-              <div className={'searchBlockContent'}>
-                <div className={'magnifyingGlassContainer'}>
-                  <MagnifyingGlass />
-                </div>
-                <span>Looking for something?</span>
-              </div>
+    <StyledContainer>
+      <nav>
+        <StyledNavContent>
+          <div className="headingBlock">
+            <Link to="/">
+              <h1>
+                <span>Game-Fo</span>
+              </h1>
             </Link>
           </div>
-        )}
-      </StyledNavContent>
-    </nav>
+          {isHidden ? (
+            <SearchBar onResultsChange={onResultsChange} />
+          ) : (
+            <div className="searchBlock">
+              <Link to="/search">
+                <div className={'searchBlockContent'}>
+                  <div className={'magnifyingGlassContainer'}>
+                    <MagnifyingGlass />
+                  </div>
+                  <span>Looking for something?</span>
+                </div>
+              </Link>
+            </div>
+          )}
+        </StyledNavContent>
+      </nav>
+    </StyledContainer>
   );
 };
 
