@@ -7,11 +7,18 @@ export const StyledContent = styled.div`
     align-items: center;
     width: 80%;
     margin: 0 auto;
-    border: 1px solid #333333;
-    border-color: ${({ inputHasFocus }) => (inputHasFocus ? 'red' : '#333333')};
+    padding: 0.75rem 0.75rem;
+    box-shadow: ${({ inputHasFocus }) =>
+      inputHasFocus
+        ? '0px 5px 8px 3px rgba(79,79,79,0.75)'
+        : '0px 2px 5px 0px rgba(51,51,51,0.75)'};
     border-radius: 40px;
-    padding: 0.75rem 1rem;
     background-color: #ffffffff;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0px 5px 8px 3px rgba(79, 79, 79, 0.75);
+    }
 
     label {
       position: absolute;
@@ -34,10 +41,6 @@ export const StyledContent = styled.div`
       width: 100%;
       font-family: inherit;
       font-size: inherit;
-
-      &::placeholder {
-        color: #333333;
-      }
     }
   }
 `;
