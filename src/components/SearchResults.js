@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-
-const StyledImageContainer = styled.div`
-  width: 100%;
-  img {
-    max-width: 100%;
-  }
-`;
+import {
+  StyledResultsList,
+  StyledResultsItem,
+  StyledImgContainer,
+} from './styles/SearchResults.styled';
 
 const SearchResults = ({ results }) => {
   useEffect(() => {
@@ -15,25 +12,27 @@ const SearchResults = ({ results }) => {
   }, [results]);
 
   const renderedItems = results.map((result) => (
-    <div key={result.id} className="resultItem">
-      <Link
-        to={`/details/${result.name}`}
-        state={{
-          selectedGame: result,
-        }}
-      >
-        <StyledImageContainer>
+    <Link
+      to={`/details/${result.name}`}
+      state={{
+        selectedGame: result,
+      }}
+    >
+      <StyledResultsItem key={result.id}>
+        <StyledImgContainer>
           <img src={result.background_image} alt={`${result.name}`} />
-        </StyledImageContainer>
-      </Link>
-    </div>
+        </StyledImgContainer>
+        <div className="itemContent">
+          <h2 className="name">{result.name}</h2>
+        </div>
+      </StyledResultsItem>
+    </Link>
   ));
 
   return results.length === 0 ? null : (
     <div className="container">
       <div className="content">
-        <h2>Search Results</h2>
-        <div className="resultsList">{renderedItems}</div>
+        <StyledResultsList>{renderedItems}</StyledResultsList>
       </div>
     </div>
   );

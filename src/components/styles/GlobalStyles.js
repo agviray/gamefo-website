@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
 * {
@@ -23,6 +23,13 @@ a {
   text-decoration: none;
   color: #333333;
 }
+`;
+
+export const StyledMainContent = styled.div`
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4rem 1.25rem;
 `;
 
 export default GlobalStyles;

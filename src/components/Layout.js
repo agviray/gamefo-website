@@ -1,14 +1,9 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import GlobalStyles from '../components/styles/GlobalStyles';
-import styled from 'styled-components';
+import GlobalStyles, {
+  StyledMainContent,
+} from '../components/styles/GlobalStyles';
 import Navbar from './Navbar';
-
-const StyledMainContent = styled.div`
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-`;
 
 const Layout = ({ onResultsChange }) => {
   return (

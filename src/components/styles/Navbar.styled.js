@@ -39,11 +39,11 @@ export const StyledNavContent = styled.div`
       padding: 0.75rem 0.75rem;
       background-color: #ffffffff;
       color: grey;
-      box-shadow: 0px 2px 5px 0px rgba(51, 51, 51, 0.75);
+      box-shadow: 0px 2px 5px 0px rgba(51, 51, 51, 0.5);
       transition: all 0.3s ease;
 
       &:hover {
-        box-shadow: 0px 5px 8px 3px rgba(79, 79, 79, 0.75);
+        box-shadow: 0px 5px 8px 3px rgba(79, 79, 79, 0.2);
       }
 
       .magnifyingGlassContainer {
