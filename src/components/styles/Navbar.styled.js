@@ -9,7 +9,7 @@ export const StyledWrapper = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    padding: 1.25rem 0;
+    padding: 2.5rem 0;
     background-color: #ffffff;
     z-index: 1;
   }

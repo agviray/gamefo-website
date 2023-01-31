@@ -5,6 +5,7 @@ import {
   StyledResultsItem,
   StyledImgContainer,
 } from './styles/SearchResults.styled';
+import PageNumbers from './PageNumbers';
 
 const SearchResults = ({ results }) => {
   useEffect(() => {
@@ -32,9 +33,8 @@ const SearchResults = ({ results }) => {
 
   return results.length === 0 ? null : (
     <div className="container">
-      <div className="content">
-        <StyledResultsList>{renderedItems}</StyledResultsList>
-      </div>
+      <StyledResultsList>{renderedItems}</StyledResultsList>
+      <PageNumbers results={results} />
     </div>
   );
 };

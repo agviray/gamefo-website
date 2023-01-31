@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Layout from './Layout';
 import HomePage from './HomePage';
-import SearchBar from './SearchBar';
 import GameDetails from './GameDetails';
 import NotFoundPage from './NotFound';
 import SearchResults from './SearchResults';
