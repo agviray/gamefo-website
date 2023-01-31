@@ -12,21 +12,22 @@ const SearchResults = ({ results }) => {
   }, [results]);
 
   const renderedItems = results.map((result) => (
-    <Link
-      to={`/details/${result.name}`}
-      state={{
-        selectedGame: result,
-      }}
-    >
-      <StyledResultsItem key={result.id}>
-        <StyledImgContainer>
-          <img src={result.background_image} alt={`${result.name}`} />
-        </StyledImgContainer>
-        <div className="itemContent">
-          <h2 className="name">{result.name}</h2>
-        </div>
-      </StyledResultsItem>
-    </Link>
+    <StyledResultsItem key={result.id}>
+      <StyledImgContainer>
+        <img src={result.background_image} alt={`${result.name}`} />
+      </StyledImgContainer>
+      <div className="itemContent">
+        <h2 className="name">{result.name}</h2>
+        <Link
+          to={`/details/${result.name}`}
+          state={{
+            selectedGame: result,
+          }}
+        >
+          <span className="button">View page</span>
+        </Link>
+      </div>
+    </StyledResultsItem>
   ));
 
   return results.length === 0 ? null : (

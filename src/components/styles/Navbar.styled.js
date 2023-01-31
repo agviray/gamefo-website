@@ -11,6 +11,7 @@ export const StyledWrapper = styled.div`
     width: 100%;
     padding: 1.25rem 0;
     background-color: #ffffff;
+    z-index: 1;
   }
 `;
 
@@ -43,7 +44,7 @@ export const StyledNavContent = styled.div`
       transition: all 0.3s ease;
 
       &:hover {
-        box-shadow: 0px 5px 8px 3px rgba(79, 79, 79, 0.2);
+        box-shadow: 0px 5px 8px 3px rgba(79, 79, 79, 0.5);
       }
 
       .magnifyingGlassContainer {
