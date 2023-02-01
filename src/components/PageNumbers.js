@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { StyledContainer } from './styles/PageNumbers.styled';
 
-const PageNumbers = ({ results }) => {
+const PageNumbers = ({ responseData }) => {
   useEffect(() => {
-    console.log(`PageNumbers says results are....
+    console.log(`PageNumbers says responseData is....
     ************************************************
     ************************************************
     `);
-    console.log(results);
+    console.log(responseData);
   }, []);
+
   return (
     <StyledContainer>
       <div className="contents">

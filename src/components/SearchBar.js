@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { StyledContent } from './styles/SearchBar.styled';
 import MagnifyingGlass from './MagnifyingGlass';
 
-const SearchBar = ({ onResultsChange }) => {
+const SearchBar = ({ onResponseDataChange }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [inputHasFocus, setInputHasFocus] = useState(true);
   const inputRef = useRef(null);
@@ -24,7 +24,7 @@ const SearchBar = ({ onResultsChange }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onResultsChange({ search: searchTerm });
+    onResponseDataChange({ search: searchTerm });
   };
 
   const onInputChange = (e) => {

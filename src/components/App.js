@@ -8,24 +8,33 @@ import NotFoundPage from './NotFound';
 import SearchResults from './SearchResults';
 
 const App = () => {
-  const [results, setResults] = useState([]);
+  const [responseData, setResponseData] = useState({});
 
-  const updateResults = async (passedParams) => {
+  const updateResponseData = async (passedParams) => {
     const response = await axios.get('http://localhost:4000/games', {
       params: {
         ...passedParams,
       },
     });
 
-    console.log(response);
-    setResults([...response.data.results]);
+    setResponseData({ ...response.data });
   };
+
+  useEffect(() => {
+    console.log(responseData);
+  }, [responseData]);
 
   return (
     <Routes>
-      <Route path="/" element={<Layout onResultsChange={updateResults} />}>
+      <Route
+        path="/"
+        element={<Layout onResponseDataChange={updateResponseData} />}
+      >
         <Route index element={<HomePage />} />
-        <Route path="/search" element={<SearchResults results={results} />} />
+        <Route
+          path="/search"
+          element={<SearchResults responseData={responseData} />}
+        />
         <Route path="/details/:name" element={<GameDetails />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>

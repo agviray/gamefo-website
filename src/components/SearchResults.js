@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   StyledResultsList,
@@ -7,10 +7,17 @@ import {
 } from './styles/SearchResults.styled';
 import PageNumbers from './PageNumbers';
 
-const SearchResults = ({ results }) => {
+const SearchResults = ({ responseData }) => {
+  const [results, setResults] = useState([]);
+
   useEffect(() => {
-    // console.log(`SearchResults says: ${JSON.stringify(results)}`);
-  }, [results]);
+    if (Object.keys(responseData).length === 0) {
+      return;
+    }
+    if (responseData.results[0] !== results[0]) {
+      setResults([...responseData.results]);
+    }
+  }, [responseData]);
 
   const renderedItems = results.map((result) => (
     <StyledResultsItem key={result.id}>
@@ -34,7 +41,7 @@ const SearchResults = ({ results }) => {
   return results.length === 0 ? null : (
     <div className="container">
       <StyledResultsList>{renderedItems}</StyledResultsList>
-      <PageNumbers results={results} />
+      <PageNumbers responseData={responseData} />
     </div>
   );
 };

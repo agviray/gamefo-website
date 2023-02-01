@@ -5,12 +5,12 @@ import GlobalStyles, {
 } from '../components/styles/GlobalStyles';
 import Navbar from './Navbar';
 
-const Layout = ({ onResultsChange }) => {
+const Layout = ({ onResponseDataChange }) => {
   return (
     <>
       <GlobalStyles />
       <header>
-        <Navbar onResultsChange={onResultsChange} />
+        <Navbar onResponseDataChange={onResponseDataChange} />
       </header>
       <main>
         <StyledMainContent>
