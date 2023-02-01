@@ -11,10 +11,10 @@ import SearchResults from './SearchResults';
 const App = () => {
   const [results, setResults] = useState([]);
 
-  const updateResults = async (term) => {
+  const updateResults = async (passedParams) => {
     const response = await axios.get('http://localhost:4000/games', {
       params: {
-        search: term,
+        ...passedParams,
       },
     });
 
@@ -25,7 +25,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout onResultsChange={updateResults} />}>
-        <Route index element={<HomePage results={results} />} />
+        <Route index element={<HomePage />} />
         <Route path="/search" element={<SearchResults results={results} />} />
         <Route path="/details/:name" element={<GameDetails />} />
         <Route path="*" element={<NotFoundPage />} />

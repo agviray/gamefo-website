@@ -22,12 +22,13 @@ const rawg = axios.create({
 });
 
 app.get('/games', async (req, res) => {
-  const searchedTerm = req.query.search;
+  console.log(req);
+  const passedParams = { ...req.query };
   const response = await rawg.get(
     `/games?key=${process.env.REACT_APP_RAWG_KEY}`,
     {
       params: {
-        search: searchedTerm,
+        ...passedParams,
       },
     }
   );

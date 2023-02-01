@@ -22,13 +22,9 @@ const SearchBar = ({ onResultsChange }) => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(inputHasFocus);
-  }, [inputHasFocus]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    onResultsChange(searchTerm);
+    onResultsChange({ search: searchTerm });
   };
 
   const onInputChange = (e) => {
