@@ -17,6 +17,7 @@ const App = () => {
       },
     });
 
+    console.log(response);
     setResponseData({ ...response.data });
   };
 
