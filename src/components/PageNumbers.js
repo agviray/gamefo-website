@@ -49,19 +49,25 @@ const PageNumbers = ({ responseData }) => {
     }
   }, [pageDetails]);
 
-  const renderPageNumbers = (pageNums) => {
+  const renderContent = (page, pageNums) => {
     if (pageNums.length === 0) {
       return;
     }
-    return pageNums.map((num, index) => <span key={index}>{num}</span>);
+    return (
+      <>
+        {page.currentPageNum === 0 ? null : <span>Prev</span>}
+        {pageNums.map((num, index) => (
+          <span key={index}>{num}</span>
+        ))}
+        {page.currentPageNum === page.finalPageNum ? null : <span>Next</span>}
+      </>
+    );
   };
 
   return (
     <StyledContainer>
-      <div className="contents">
-        <span>Prev</span>
-        {renderPageNumbers(pageNumsToRender)}
-        <span>Next</span>
+      <div className="content">
+        {renderContent(pageDetails, pageNumsToRender)}
       </div>
     </StyledContainer>
   );
