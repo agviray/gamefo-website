@@ -2,77 +2,107 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { StyledContainer } from './styles/PageNumbers.styled';
 
+const initialResponseDetails = {
+  resultsFound: null,
+};
+
+const initialPageDetails = {
+  resultsPerPage: 20,
+  prevCurrentPageNum: null,
+  currentPageNum: null,
+  finalPageNum: null,
+  pageNumsToShow: [],
+};
+
 const PageNumbers = ({ responseData }) => {
-  const [pageDetails, setPageDetails] = useState({
-    prevCurrentPageNum: null,
-    currentPageNum: 1,
-  });
-  const [pageNumsToRender, setPageNumsToRender] = useState([]);
+  const [responseDetails, setResponseDetails] = useState(
+    initialResponseDetails
+  );
+  const [pageDetails, setPageDetails] = useState(initialPageDetails);
 
   useEffect(() => {
-    // console.log(JSON.stringify(responseData));
-    // console.log(responseData);
-
-    const updatePageNumDetails = (resData) => {
+    const updateResponseDetails = (resData) => {
       const resultsFound = resData.count;
-      const resultsPerPage = 20;
-      const finalPageNum = Math.ceil(resultsFound / resultsPerPage);
-      setPageDetails({
-        ...pageDetails,
+      setResponseDetails({
         resultsFound: resultsFound,
-        resultsPerPage: resultsPerPage,
-        finalPageNum: finalPageNum,
       });
     };
 
     if (Object.keys(responseData).length !== 0) {
-      updatePageNumDetails(responseData);
+      updateResponseDetails(responseData);
     }
   }, [responseData]);
 
   useEffect(() => {
-    // console.log(pageDetails)
-    const updatePageNumsToRender = (currentPage) => {
+    console.log(`
+    ************************
+    responseDetails state is:
+    ${JSON.stringify(responseDetails)}
+    ************************
+    `);
+
+    const updatePageNumsToShow = (currentPage) => {
       const totalPageNumsToShow = 5;
+      const finalPageNum = Math.ceil(
+        responseDetails.resultsFound / pageDetails.resultsPerPage
+      );
       let newPageNumsToShow = [];
 
-      if (currentPage === 1) {
+      if (currentPage === null) {
         for (let i = 0; i < totalPageNumsToShow; i++) {
-          if (i + 1 <= pageDetails.finalPageNum) {
+          if (i + 1 <= finalPageNum) {
             newPageNumsToShow[i] = i + 1;
           }
         }
-        setPageNumsToRender([...newPageNumsToShow]);
+        setPageDetails({
+          ...pageDetails,
+          currentPageNum: 1,
+          finalPageNum: finalPageNum,
+          pageNumsToShow: [...newPageNumsToShow],
+        });
       }
     };
 
-    if (pageDetails.currentPageNum === 1) {
-      updatePageNumsToRender(1);
+    if (responseDetails.resultsFound === null) {
+      return;
     }
+
+    if (pageDetails.currentPageNum === null) {
+      updatePageNumsToShow(null);
+    }
+  }, [responseDetails]);
+
+  useEffect(() => {
+    console.log(`
+    ///////////////////////
+    pageDetails state is: 
+    ${JSON.stringify(pageDetails)}
+    ///////////////////////
+  `);
   }, [pageDetails]);
 
-  const goToPrevPage = (details) => {
+  const goToPrevPage = (page) => {
     setPageDetails({
-      ...details,
-      prevCurrentPageNum: details.currentPageNum,
-      currentPageNum: details.currentPageNum - 1,
+      ...page,
+      prevCurrentPageNum: page.currentPageNum,
+      currentPageNum: page.currentPageNum - 1,
     });
   };
 
-  const goToNextPage = (details) => {
+  const goToNextPage = (page) => {
     setPageDetails({
-      ...details,
-      prevCurrentPageNum: details.currentPageNum,
-      currentPageNum: details.currentPageNum + 1,
+      ...page,
+      prevCurrentPageNum: page.currentPageNum,
+      currentPageNum: page.currentPageNum + 1,
     });
   };
 
-  const renderContent = (page, pageNums) => {
+  const renderContent = (page) => {
     /*
      return (
        <>
          {page.currentPageNum === 1 ? null : <span>Prev</span>}
-         {pageNums.map((num, index) => (
+         {page.pageNumsToShow.map((num, index) => (
            <span key={index}>{num}</span>
          ))}
          {page.currentPageNum === page.finalPageNum ? null : <span>Next</span>}
@@ -82,7 +112,7 @@ const PageNumbers = ({ responseData }) => {
     return (
       <>
         <span onClick={() => goToPrevPage(page)}>Prev</span>
-        {pageNums.map((num, index) => (
+        {page.pageNumsToShow.map((num, index) => (
           <span key={index}>{num}</span>
         ))}
         <span onClick={() => goToNextPage(page)}>Next</span>
@@ -92,9 +122,7 @@ const PageNumbers = ({ responseData }) => {
 
   return (
     <StyledContainer>
-      <div className="content">
-        {renderContent(pageDetails, pageNumsToRender)}
-      </div>
+      <div className="content">{renderContent(pageDetails)}</div>
     </StyledContainer>
   );
 };

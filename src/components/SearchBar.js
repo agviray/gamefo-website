@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { StyledContent } from './styles/SearchBar.styled';
+import { ResponseContext } from './App';
 import MagnifyingGlass from './MagnifyingGlass';
 
-const SearchBar = ({ onResponseDataChange }) => {
+const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [inputHasFocus, setInputHasFocus] = useState(true);
   const inputRef = useRef(null);
   const formContentRef = useRef(null);
+  const responseContextValue = useContext(ResponseContext);
 
   useEffect(() => {
     const onBodyClick = () => {
@@ -24,7 +26,7 @@ const SearchBar = ({ onResponseDataChange }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onResponseDataChange({ search: searchTerm });
+    responseContextValue.onResponseDataChange({ search: searchTerm });
   };
 
   const onInputChange = (e) => {

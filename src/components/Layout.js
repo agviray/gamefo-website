@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import GlobalStyles, {
   StyledMainContent,
 } from '../components/styles/GlobalStyles';
 import Navbar from './Navbar';
 
-const Layout = ({ onResponseDataChange }) => {
+export const ResponseContext = createContext(null);
+
+const Layout = () => {
   return (
     <>
       <GlobalStyles />
       <header>
-        <Navbar onResponseDataChange={onResponseDataChange} />
+        <Navbar />
       </header>
       <main>
         <StyledMainContent>

@@ -4,7 +4,7 @@ import { StyledWrapper, StyledNavContent } from './styles/Navbar.styled';
 import SearchBar from './SearchBar';
 import MagnifyingGlass from './MagnifyingGlass';
 
-const Navbar = ({ onResponseDataChange }) => {
+const Navbar = () => {
   const [isHidden, setIsHidden] = useState(false);
   const { pathname } = useLocation();
 
@@ -29,7 +29,7 @@ const Navbar = ({ onResponseDataChange }) => {
               </Link>
             </div>
             {isHidden ? (
-              <SearchBar onResponseDataChange={onResponseDataChange} />
+              <SearchBar />
             ) : (
               <div className="searchBlock">
                 <Link to="/search">

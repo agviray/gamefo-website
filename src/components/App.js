@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Layout from './Layout';
@@ -6,6 +6,8 @@ import HomePage from './HomePage';
 import GameDetails from './GameDetails';
 import NotFoundPage from './NotFound';
 import SearchResults from './SearchResults';
+
+export const ResponseContext = createContext(null);
 
 const App = () => {
   const [responseData, setResponseData] = useState({});
@@ -29,7 +31,16 @@ const App = () => {
     <Routes>
       <Route
         path="/"
-        element={<Layout onResponseDataChange={updateResponseData} />}
+        element={
+          <ResponseContext.Provider
+            value={{
+              responseData: responseData,
+              onResponseDataChange: updateResponseData,
+            }}
+          >
+            <Layout />
+          </ResponseContext.Provider>
+        }
       >
         <Route index element={<HomePage />} />
         <Route
