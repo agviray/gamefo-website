@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import { StyledContainer } from './styles/PageNumbers.styled';
 
 const PageNumbers = ({ responseData }) => {
-  const [pageDetails, setPageDetails] = useState({ currentPageNum: 0 });
+  const [pageDetails, setPageDetails] = useState({
+    prevCurrentPageNum: null,
+    currentPageNum: 1,
+  });
   const [pageNumsToRender, setPageNumsToRender] = useState([]);
 
   useEffect(() => {
@@ -33,7 +36,7 @@ const PageNumbers = ({ responseData }) => {
       const totalPageNumsToShow = 5;
       let newPageNumsToShow = [];
 
-      if (currentPage === 0) {
+      if (currentPage === 1) {
         for (let i = 0; i < totalPageNumsToShow; i++) {
           if (i + 1 <= pageDetails.finalPageNum) {
             newPageNumsToShow[i] = i + 1;
@@ -43,23 +46,46 @@ const PageNumbers = ({ responseData }) => {
       }
     };
 
-    const previousCurrentPageNum = pageDetails.currentPageNum;
-    if (pageDetails.currentPageNum === 0) {
-      updatePageNumsToRender(0);
+    if (pageDetails.currentPageNum === 1) {
+      updatePageNumsToRender(1);
     }
   }, [pageDetails]);
 
+  const goToPrevPage = (details) => {
+    setPageDetails({
+      ...details,
+      prevCurrentPageNum: details.currentPageNum,
+      currentPageNum: details.currentPageNum - 1,
+    });
+  };
+
+  const goToNextPage = (details) => {
+    setPageDetails({
+      ...details,
+      prevCurrentPageNum: details.currentPageNum,
+      currentPageNum: details.currentPageNum + 1,
+    });
+  };
+
   const renderContent = (page, pageNums) => {
-    if (pageNums.length === 0) {
-      return;
-    }
+    /*
+     return (
+       <>
+         {page.currentPageNum === 1 ? null : <span>Prev</span>}
+         {pageNums.map((num, index) => (
+           <span key={index}>{num}</span>
+         ))}
+         {page.currentPageNum === page.finalPageNum ? null : <span>Next</span>}
+       </>
+     );
+    */
     return (
       <>
-        {page.currentPageNum === 0 ? null : <span>Prev</span>}
+        <span onClick={() => goToPrevPage(page)}>Prev</span>
         {pageNums.map((num, index) => (
           <span key={index}>{num}</span>
         ))}
-        {page.currentPageNum === page.finalPageNum ? null : <span>Next</span>}
+        <span onClick={() => goToNextPage(page)}>Next</span>
       </>
     );
   };
