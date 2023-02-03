@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Layout from './Layout';
@@ -7,7 +7,6 @@ import GameDetails from './GameDetails';
 import NotFoundPage from './NotFound';
 import SearchResults from './SearchResults';
 
-export const ResponseContext = createContext(null);
 const initialResponseData = {
   termSearched: '',
   pageRequested: null,
@@ -42,14 +41,10 @@ const App = () => {
       <Route
         path="/"
         element={
-          <ResponseContext.Provider
-            value={{
-              responseData: responseData,
-              onResponseDataChange: updateResponseData,
-            }}
-          >
-            <Layout />
-          </ResponseContext.Provider>
+          <Layout
+            responseData={responseData}
+            onResponseDataChange={updateResponseData}
+          />
         }
       >
         <Route index element={<HomePage />} />

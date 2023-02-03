@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { StyledContent } from './styles/SearchBar.styled';
-import { ResponseContext } from './App';
+import { ResponseContext } from './Layout';
 import MagnifyingGlass from './MagnifyingGlass';
 
 const initialSearchParameters = {
