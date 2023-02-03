@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {
   StyledResultsList,
@@ -6,18 +6,24 @@ import {
   StyledImgContainer,
 } from './styles/SearchResults.styled';
 import PageNumbers from './PageNumbers';
+import { ResponseContext } from './Layout';
 
-const SearchResults = ({ responseData }) => {
+const SearchResults = () => {
   const [results, setResults] = useState([]);
+  const responseContextValue = useContext(ResponseContext);
 
   useEffect(() => {
-    if (Object.keys(responseData.receivedData).length === 0) {
+    if (
+      Object.keys(responseContextValue.responseData.receivedData).length === 0
+    ) {
       return;
     }
-    if (responseData.receivedData.results[0] !== results[0]) {
-      setResults([...responseData.receivedData.results]);
+    if (
+      responseContextValue.responseData.receivedData.results[0] !== results[0]
+    ) {
+      setResults([...responseContextValue.responseData.receivedData.results]);
     }
-  }, [responseData]);
+  }, [responseContextValue.responseData]);
 
   const renderedItems = results.map((result) => (
     <StyledResultsItem key={result.id}>
@@ -41,7 +47,7 @@ const SearchResults = ({ responseData }) => {
   return results.length === 0 ? null : (
     <div className="container">
       <StyledResultsList>{renderedItems}</StyledResultsList>
-      <PageNumbers responseData={responseData} />
+      <PageNumbers responseData={responseContextValue.responseData} />
     </div>
   );
 };
