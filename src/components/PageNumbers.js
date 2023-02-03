@@ -15,7 +15,7 @@ const initialPageDetails = {
   pageNumsToShow: [],
 };
 
-const PageNumbers = ({ responseData }) => {
+const PageNumbers = ({ response }) => {
   const [responseDetails, setResponseDetails] = useState(
     initialResponseDetails
   );
@@ -27,10 +27,10 @@ const PageNumbers = ({ responseData }) => {
       setResponseDetails(initialResponseDetails);
     };
 
-    const updateResponseDetails = (response) => {
-      const currentSearchedTerm = response.termSearched;
-      const currentPageRequested = response.pageRequested;
-      const resultsFound = response.receivedData.count;
+    const updateResponseDetails = (res) => {
+      const currentSearchedTerm = res.termSearched;
+      const currentPageRequested = res.pageRequested;
+      const resultsFound = res.dataReceived.count;
       setResponseDetails({
         currentSearchedTerm: currentSearchedTerm,
         currentPageRequested: currentPageRequested,
@@ -38,14 +38,14 @@ const PageNumbers = ({ responseData }) => {
       });
     };
 
-    if (responseData.termSearched !== responseDetails.currentSearchedTerm) {
+    if (response.termSearched !== responseDetails.currentSearchedTerm) {
       resetPageNumbers();
     }
 
-    if (Object.keys(responseData.receivedData).length !== 0) {
-      updateResponseDetails(responseData);
+    if (Object.keys(response.dataReceived).length !== 0) {
+      updateResponseDetails(response);
     }
-  }, [responseData]);
+  }, [response]);
 
   useEffect(() => {
     console.log(`

@@ -8,42 +8,42 @@ import Navbar from './Navbar';
 
 export const ResponseContext = createContext(null);
 
-const initialResponseData = {
+const initialResponse = {
   termSearched: '',
   pageRequested: null,
-  receivedData: {},
+  dataReceived: {},
 };
 
 const Layout = () => {
-  const [responseData, setResponseData] = useState(initialResponseData);
+  const [response, setResponse] = useState(initialResponse);
 
-  const updateResponseData = async (term, pageNum) => {
-    const response = await axios.get('http://localhost:4000/games', {
+  const updateResponse = async (term, pageNum) => {
+    const apiResponse = await axios.get('http://localhost:4000/games', {
       params: {
         search: term,
         page: pageNum,
       },
     });
 
-    console.log(response);
-    setResponseData({
+    console.log(apiResponse);
+    setResponse({
       termSearched: term,
       pageRequested: pageNum,
-      receivedData: { ...response.data },
+      dataReceived: { ...apiResponse.data },
     });
   };
 
   useEffect(() => {
-    console.log(responseData);
-  }, [responseData]);
+    console.log(response);
+  }, [response]);
 
   return (
     <>
       <GlobalStyles />
       <ResponseContext.Provider
         value={{
-          responseData: responseData,
-          onResponseDataChange: updateResponseData,
+          response: response,
+          onResponseChange: updateResponse,
         }}
       >
         <header>

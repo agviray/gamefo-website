@@ -13,17 +13,13 @@ const SearchResults = () => {
   const responseContextValue = useContext(ResponseContext);
 
   useEffect(() => {
-    if (
-      Object.keys(responseContextValue.responseData.receivedData).length === 0
-    ) {
+    if (Object.keys(responseContextValue.response.dataReceived).length === 0) {
       return;
     }
-    if (
-      responseContextValue.responseData.receivedData.results[0] !== results[0]
-    ) {
-      setResults([...responseContextValue.responseData.receivedData.results]);
+    if (responseContextValue.response.dataReceived.results[0] !== results[0]) {
+      setResults([...responseContextValue.response.dataReceived.results]);
     }
-  }, [responseContextValue.responseData]);
+  }, [responseContextValue.response]);
 
   const renderedItems = results.map((result) => (
     <StyledResultsItem key={result.id}>
@@ -47,7 +43,7 @@ const SearchResults = () => {
   return results.length === 0 ? null : (
     <div className="container">
       <StyledResultsList>{renderedItems}</StyledResultsList>
-      <PageNumbers responseData={responseContextValue.responseData} />
+      <PageNumbers response={responseContextValue.response} />
     </div>
   );
 };
