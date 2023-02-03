@@ -3,8 +3,15 @@ import { StyledContent } from './styles/SearchBar.styled';
 import { ResponseContext } from './App';
 import MagnifyingGlass from './MagnifyingGlass';
 
+const initialSearchParameters = {
+  term: '',
+  page: null,
+};
+
 const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchParameters, setSearchParameters] = useState(
+    initialSearchParameters
+  );
   const [inputHasFocus, setInputHasFocus] = useState(true);
   const inputRef = useRef(null);
   const formContentRef = useRef(null);
@@ -26,11 +33,13 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    responseContextValue.onResponseDataChange({ search: searchTerm });
+    const term = searchParameters.term;
+    const page = 1;
+    responseContextValue.onResponseDataChange(term, page);
   };
 
   const onInputChange = (e) => {
-    setSearchTerm(e.target.value);
+    setSearchParameters({ ...searchParameters, term: e.target.value });
   };
 
   return (
@@ -48,7 +57,7 @@ const SearchBar = () => {
               id="SearchInput"
               type="text"
               placeholder="Looking for something?"
-              value={searchTerm}
+              value={searchParameters.term}
               autoFocus
             />
           </div>

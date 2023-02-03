@@ -11,11 +11,11 @@ const SearchResults = ({ responseData }) => {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    if (Object.keys(responseData).length === 0) {
+    if (Object.keys(responseData.receivedData).length === 0) {
       return;
     }
-    if (responseData.results[0] !== results[0]) {
-      setResults([...responseData.results]);
+    if (responseData.receivedData.results[0] !== results[0]) {
+      setResults([...responseData.receivedData.results]);
     }
   }, [responseData]);
 

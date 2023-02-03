@@ -1,11 +1,9 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import GlobalStyles, {
   StyledMainContent,
 } from '../components/styles/GlobalStyles';
 import Navbar from './Navbar';
-
-export const ResponseContext = createContext(null);
 
 const Layout = () => {
   return (

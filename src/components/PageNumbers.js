@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { StyledContainer } from './styles/PageNumbers.styled';
 
 const initialResponseDetails = {
+  currentSearchedTerm: '',
+  currentPageRequested: null,
   resultsFound: null,
 };
 
@@ -21,14 +22,27 @@ const PageNumbers = ({ responseData }) => {
   const [pageDetails, setPageDetails] = useState(initialPageDetails);
 
   useEffect(() => {
-    const updateResponseDetails = (resData) => {
-      const resultsFound = resData.count;
+    const resetPageNumbers = () => {
+      setPageDetails(initialPageDetails);
+      setResponseDetails(initialResponseDetails);
+    };
+
+    const updateResponseDetails = (response) => {
+      const currentSearchedTerm = response.termSearched;
+      const currentPageRequested = response.pageRequested;
+      const resultsFound = response.receivedData.count;
       setResponseDetails({
+        currentSearchedTerm: currentSearchedTerm,
+        currentPageRequested: currentPageRequested,
         resultsFound: resultsFound,
       });
     };
 
-    if (Object.keys(responseData).length !== 0) {
+    if (responseData.termSearched !== responseDetails.currentSearchedTerm) {
+      resetPageNumbers();
+    }
+
+    if (Object.keys(responseData.receivedData).length !== 0) {
       updateResponseDetails(responseData);
     }
   }, [responseData]);
@@ -41,34 +55,34 @@ const PageNumbers = ({ responseData }) => {
     ************************
     `);
 
-    const updatePageNumsToShow = (currentPage) => {
+    const updatePageNumsToShow = (page) => {
       const totalPageNumsToShow = 5;
       const finalPageNum = Math.ceil(
         responseDetails.resultsFound / pageDetails.resultsPerPage
       );
       let newPageNumsToShow = [];
 
-      if (currentPage === null) {
+      if (page === 1) {
         for (let i = 0; i < totalPageNumsToShow; i++) {
           if (i + 1 <= finalPageNum) {
             newPageNumsToShow[i] = i + 1;
           }
         }
-        setPageDetails({
-          ...pageDetails,
-          currentPageNum: 1,
-          finalPageNum: finalPageNum,
-          pageNumsToShow: [...newPageNumsToShow],
-        });
       }
+      setPageDetails({
+        ...pageDetails,
+        currentPageNum: page,
+        finalPageNum: finalPageNum,
+        pageNumsToShow: [...newPageNumsToShow],
+      });
     };
 
     if (responseDetails.resultsFound === null) {
       return;
     }
 
-    if (pageDetails.currentPageNum === null) {
-      updatePageNumsToShow(null);
+    if (responseDetails.currentPageRequested === 1) {
+      updatePageNumsToShow(1);
     }
   }, [responseDetails]);
 

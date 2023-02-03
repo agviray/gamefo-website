@@ -8,19 +8,29 @@ import NotFoundPage from './NotFound';
 import SearchResults from './SearchResults';
 
 export const ResponseContext = createContext(null);
+const initialResponseData = {
+  termSearched: '',
+  pageRequested: null,
+  receivedData: {},
+};
 
 const App = () => {
-  const [responseData, setResponseData] = useState({});
+  const [responseData, setResponseData] = useState(initialResponseData);
 
-  const updateResponseData = async (passedParams) => {
+  const updateResponseData = async (term, pageNum) => {
     const response = await axios.get('http://localhost:4000/games', {
       params: {
-        ...passedParams,
+        search: term,
+        page: pageNum,
       },
     });
 
     console.log(response);
-    setResponseData({ ...response.data });
+    setResponseData({
+      termSearched: term,
+      pageRequested: pageNum,
+      receivedData: { ...response.data },
+    });
   };
 
   useEffect(() => {
