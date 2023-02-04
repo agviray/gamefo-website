@@ -13,7 +13,6 @@ const initialResponseDetails = {
 
 const initialPageDetails = {
   resultsPerPage: 20,
-  prevCurrentPageNum: null,
   currentPageNum: null,
   finalPageNum: null,
   pageNumsToShow: [],
@@ -150,19 +149,15 @@ const PageNumbers = ({ response }) => {
   }, [pageDetails]);
 
   const goToPrevPage = (term, page) => {
-    setPageDetails({
-      ...page,
-      prevCurrentPageNum: page.currentPageNum,
-    });
     responseContextValue.onResponseChange(term, page.currentPageNum - 1);
   };
 
   const goToNextPage = (term, page) => {
-    setPageDetails({
-      ...page,
-      prevCurrentPageNum: page.currentPageNum,
-    });
     responseContextValue.onResponseChange(term, page.currentPageNum + 1);
+  };
+
+  const goToPage = (term, pageNum) => {
+    responseContextValue.onResponseChange(term, pageNum);
   };
 
   const renderContent = (page) => {
@@ -186,6 +181,7 @@ const PageNumbers = ({ response }) => {
               className={`${
                 num !== pageDetails.currentPageNum ? 'inactive' : 'active'
               }`}
+              onClick={() => goToPage(responseDetails.currentSearchedTerm, num)}
             >
               {num}
             </span>

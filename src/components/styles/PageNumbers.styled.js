@@ -18,6 +18,10 @@ export const StyledContainer = styled.div`
       align-items: center;
       gap: 10px;
 
+      span:hover {
+        cursor: pointer;
+      }
+
       .inactive {
         color: lightgray;
       }
