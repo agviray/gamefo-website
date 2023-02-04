@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyledContainer } from './styles/PageNumbers.styled';
+import {
+  StyledContainer,
+  StyledPageController,
+} from './styles/PageNumbers.styled';
 import { ResponseContext } from './Layout';
 
 const initialResponseDetails = {
@@ -142,6 +145,10 @@ const PageNumbers = ({ response }) => {
     }
   }, [responseDetails]);
 
+  useEffect(() => {
+    console.log(pageDetails);
+  }, [pageDetails]);
+
   const goToPrevPage = (term, page) => {
     setPageDetails({
       ...page,
@@ -161,7 +168,9 @@ const PageNumbers = ({ response }) => {
   const renderContent = (page) => {
     return (
       <>
-        {page.currentPageNum === 1 ? null : (
+        <StyledPageController
+          className={`prev ${page.currentPageNum === 1 ? 'hidden' : ''}`}
+        >
           <span
             onClick={() =>
               goToPrevPage(responseDetails.currentSearchedTerm, page)
@@ -169,11 +178,24 @@ const PageNumbers = ({ response }) => {
           >
             Prev
           </span>
-        )}
-        {page.pageNumsToShow.map((num, index) => (
-          <span key={index}>{num}</span>
-        ))}
-        {page.currentPageNum === page.finalPageNum ? null : (
+        </StyledPageController>
+        <div className={'pageNumbers'}>
+          {page.pageNumsToShow.map((num, index) => (
+            <span
+              key={index}
+              className={`${
+                num !== pageDetails.currentPageNum ? 'inactive' : 'active'
+              }`}
+            >
+              {num}
+            </span>
+          ))}
+        </div>
+        <StyledPageController
+          className={`next ${
+            page.currentPageNum === page.finalPageNum ? 'hidden' : ''
+          }`}
+        >
           <span
             onClick={() =>
               goToNextPage(responseDetails.currentSearchedTerm, page)
@@ -181,7 +203,7 @@ const PageNumbers = ({ response }) => {
           >
             Next
           </span>
-        )}
+        </StyledPageController>
       </>
     );
   };
