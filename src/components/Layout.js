@@ -34,7 +34,14 @@ const Layout = () => {
   };
 
   useEffect(() => {
-    console.log(response);
+    console.log(`
+    #######################################
+    THE CURRENT TERM SEARCHED IS: 
+    ${response.termSearched}
+    THE CURRENT PAGE OF RESULTS IS PAGE: 
+    ${response.pageRequested}
+    #######################################
+    `);
   }, [response]);
 
   return (

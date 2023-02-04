@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyledContainer } from './styles/PageNumbers.styled';
+import { ResponseContext } from './Layout';
 
 const initialResponseDetails = {
   currentSearchedTerm: '',
@@ -20,6 +21,7 @@ const PageNumbers = ({ response }) => {
     initialResponseDetails
   );
   const [pageDetails, setPageDetails] = useState(initialPageDetails);
+  const responseContextValue = useContext(ResponseContext);
 
   useEffect(() => {
     const resetPageNumbers = () => {
@@ -47,89 +49,139 @@ const PageNumbers = ({ response }) => {
     }
   }, [response]);
 
+  // *************************
+  // About setNewPageDetails
+  // *************************
+  // - Responsible setting pageDetails whenever a new search term is submitted.
+  // - This includes setting the current range of numbers displayed at the bottom
+  //   of the page.
   useEffect(() => {
-    console.log(`
-    ************************
-    responseDetails state is:
-    ${JSON.stringify(responseDetails)}
-    ************************
-    `);
-
-    const updatePageNumsToShow = (page) => {
+    const setNewPageDetails = (page) => {
       const totalPageNumsToShow = 5;
       const finalPageNum = Math.ceil(
         responseDetails.resultsFound / pageDetails.resultsPerPage
       );
+      const currentRangeNums = pageDetails.pageNumsToShow;
       let newPageNumsToShow = [];
 
-      if (page === 1) {
+      if (currentRangeNums.length === 0) {
         for (let i = 0; i < totalPageNumsToShow; i++) {
           if (i + 1 <= finalPageNum) {
             newPageNumsToShow[i] = i + 1;
+          } else {
+            break;
           }
         }
+        setPageDetails({
+          ...pageDetails,
+          currentPageNum: page,
+          finalPageNum: finalPageNum,
+          pageNumsToShow: [...newPageNumsToShow],
+        });
       }
-      setPageDetails({
-        ...pageDetails,
-        currentPageNum: page,
-        finalPageNum: finalPageNum,
-        pageNumsToShow: [...newPageNumsToShow],
-      });
+    };
+
+    // ***************************
+    // About updatePageNumsToShow
+    // ***************************
+    // - Responsible for updating the current range of numbers displayed at the
+    //   bottom of the page.
+    // - The range of numbers must not exceed 5--this is just the max numbers that
+    //   want to show in the range =).
+    // - The numbers in the range are updated accordingly, depending on the current
+    //   page number, and whether the prev/next button is clicked.
+    const updatePageNumsToShow = (page) => {
+      const totalPageNumsToShow = 5;
+      const currentRangeNums = pageDetails.pageNumsToShow;
+      const firstRangeNum = currentRangeNums[0];
+      const lastRangeNum = currentRangeNums[currentRangeNums.length - 1];
+      let newPageNumsToShow = [];
+
+      if (currentRangeNums.includes(page)) {
+        setPageDetails({
+          ...pageDetails,
+          currentPageNum: page,
+        });
+        return;
+      }
+
+      if (!currentRangeNums.includes(page)) {
+        for (let i = 0; i < totalPageNumsToShow; i++) {
+          if (page < firstRangeNum) {
+            newPageNumsToShow[i] = page - i;
+          }
+          if (page > lastRangeNum) {
+            if (page + i <= pageDetails.finalPageNum) {
+              newPageNumsToShow[i] = page + i;
+            } else {
+              break;
+            }
+          }
+        }
+        newPageNumsToShow.sort((a, b) => {
+          return a - b;
+        });
+        setPageDetails({
+          ...pageDetails,
+          currentPageNum: page,
+          pageNumsToShow: [...newPageNumsToShow],
+        });
+      }
     };
 
     if (responseDetails.resultsFound === null) {
       return;
     }
 
-    if (responseDetails.currentPageRequested === 1) {
-      updatePageNumsToShow(1);
+    if (responseDetails.currentPageRequested !== null) {
+      if (pageDetails.pageNumsToShow.length === 0) {
+        setNewPageDetails(responseDetails.currentPageRequested);
+      } else {
+        updatePageNumsToShow(responseDetails.currentPageRequested);
+      }
     }
   }, [responseDetails]);
 
-  useEffect(() => {
-    console.log(`
-    ///////////////////////
-    pageDetails state is: 
-    ${JSON.stringify(pageDetails)}
-    ///////////////////////
-  `);
-  }, [pageDetails]);
-
-  const goToPrevPage = (page) => {
+  const goToPrevPage = (term, page) => {
     setPageDetails({
       ...page,
       prevCurrentPageNum: page.currentPageNum,
-      currentPageNum: page.currentPageNum - 1,
     });
+    responseContextValue.onResponseChange(term, page.currentPageNum - 1);
   };
 
-  const goToNextPage = (page) => {
+  const goToNextPage = (term, page) => {
     setPageDetails({
       ...page,
       prevCurrentPageNum: page.currentPageNum,
-      currentPageNum: page.currentPageNum + 1,
     });
+    responseContextValue.onResponseChange(term, page.currentPageNum + 1);
   };
 
   const renderContent = (page) => {
-    /*
-     return (
-       <>
-         {page.currentPageNum === 1 ? null : <span>Prev</span>}
-         {page.pageNumsToShow.map((num, index) => (
-           <span key={index}>{num}</span>
-         ))}
-         {page.currentPageNum === page.finalPageNum ? null : <span>Next</span>}
-       </>
-     );
-    */
     return (
       <>
-        <span onClick={() => goToPrevPage(page)}>Prev</span>
+        {page.currentPageNum === 1 ? null : (
+          <span
+            onClick={() =>
+              goToPrevPage(responseDetails.currentSearchedTerm, page)
+            }
+          >
+            Prev
+          </span>
+        )}
         {page.pageNumsToShow.map((num, index) => (
           <span key={index}>{num}</span>
         ))}
-        <span onClick={() => goToNextPage(page)}>Next</span>
+        {page.currentPageNum === page.finalPageNum ? null : (
+          <span
+            onClick={() =>
+              goToNextPage(responseDetails.currentSearchedTerm, page)
+            }
+          >
+            Next
+          </span>
+        )}
       </>
     );
   };
