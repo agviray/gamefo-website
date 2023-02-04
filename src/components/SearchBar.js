@@ -42,11 +42,22 @@ const SearchBar = () => {
     setSearchParameters({ ...searchParameters, term: e.target.value });
   };
 
+  const setInputFocus = (e) => {
+    const input = inputRef.current;
+    if (e.target.contains(input)) {
+      input.focus();
+    }
+  };
+
   return (
     <>
       <StyledContent inputHasFocus={inputHasFocus}>
         <form onSubmit={handleSubmit}>
-          <div ref={formContentRef} className="formContent">
+          <div
+            ref={formContentRef}
+            className="formContent"
+            onClick={(e) => setInputFocus(e)}
+          >
             <label htmlFor="SearchInput">Search</label>
             <div className={'magnifyingGlassContainer'}>
               <MagnifyingGlass color={`${inputHasFocus ? 'red' : '#333333'}`} />
