@@ -4,12 +4,12 @@ export const StyledCard = styled.div`
   position: relative;
   height: 400px;
   border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px 0px;
   transition: all 0.3s ease;
   overflow: hidden;
 
   &:hover {
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 6px 16px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 20px 2px;
   }
 
   @media screen and (min-width: 500px) {
