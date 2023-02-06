@@ -4,15 +4,13 @@ import {
   StyledCard,
   StyledImgContainer,
   StyledContent,
+  StyledImageContainer,
 } from './styles/Card.styled';
 
 const Card = ({ result }) => {
   return (
     <StyledCard>
-      <StyledImgContainer>
-        <img src={result.background_image} alt={`${result.name}`} />
-      </StyledImgContainer>
-      <StyledContent>
+      {/* <StyledContent>
         <h2>{result.name}</h2>
         <Link
           to={`/details/${result.name}`}
@@ -22,7 +20,8 @@ const Card = ({ result }) => {
         >
           <span className="button">View page</span>
         </Link>
-      </StyledContent>
+      </StyledContent> */}
+      <StyledImageContainer imgUrl={result.background_image} />
     </StyledCard>
   );
 };
