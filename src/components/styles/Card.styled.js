@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledCard = styled.div`
-  height: 100%;
+  height: 400px;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
   transition: all 0.3s ease;
@@ -10,20 +10,26 @@ export const StyledCard = styled.div`
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.5) 0px 6px 16px;
   }
+
+  @media screen and (min-width: 500px) {
+    height: 450px;
+  }
+  @media screen and (min-width: 950px) {
+    height: 475px;
+  }
+
+  @media screen and (min-width: 1300px) {
+    height: 500px;
+  }
 `;
 
-export const StyledImgContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin-bottom: 1rem;
-  overflow: hidden;
-  max-height: 135px;
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-  }
+export const StyledImageContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  background-image: url(${({ imgUrl }) => (imgUrl ? `${imgUrl}` : '')});
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 `;
 
 export const StyledContent = styled.div`
