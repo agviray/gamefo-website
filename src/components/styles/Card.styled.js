@@ -42,13 +42,11 @@ export const StyledContent = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0 1rem 1rem 1rem;
+  padding: 2rem 1rem 1rem 1rem;
   background-color: rgba(51, 51, 51, 0.6);
 
   h2 {
     width: 100%;
-    margin-bottom: 2rem;
-    padding-top: 2rem;
     text-align: center;
     font-size: 20px;
     font-weight: 600;
@@ -57,6 +55,10 @@ export const StyledContent = styled.div`
     @media screen and (min-width: 950px) {
       font-size: 25px;
     }
+  }
+
+  div {
+    padding-top: 2rem;
   }
 
   .button {
