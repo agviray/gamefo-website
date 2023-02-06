@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  StyledResultsList,
-  StyledResultsItem,
-  StyledImgContainer,
-} from './styles/SearchResults.styled';
-import PageNumbers from './PageNumbers';
+import { StyledResultsList } from './styles/SearchResults.styled';
 import { ResponseContext } from './Layout';
+import PageNumbers from './PageNumbers';
+import Card from './Card';
 
 const SearchResults = () => {
   const [results, setResults] = useState([]);
@@ -22,22 +18,7 @@ const SearchResults = () => {
   }, [responseContextValue.response]);
 
   const renderedItems = results.map((result) => (
-    <StyledResultsItem key={result.id}>
-      <StyledImgContainer>
-        <img src={result.background_image} alt={`${result.name}`} />
-      </StyledImgContainer>
-      <div className="itemContent">
-        <h2 className="name">{result.name}</h2>
-        <Link
-          to={`/details/${result.name}`}
-          state={{
-            selectedGame: result,
-          }}
-        >
-          <span className="button">View page</span>
-        </Link>
-      </div>
-    </StyledResultsItem>
+    <Card key={result.id} result={result} />
   ));
 
   return results.length === 0 ? null : (
