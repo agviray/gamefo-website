@@ -50,9 +50,13 @@ export const StyledContent = styled.div`
     margin-bottom: 2rem;
     padding-top: 2rem;
     text-align: center;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     color: #f3f3f3;
+
+    @media screen and (min-width: 950px) {
+      font-size: 25px;
+    }
   }
 
   .button {
