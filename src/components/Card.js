@@ -21,6 +21,7 @@ const Card = ({ result }) => {
           <span className="button">View page</span>
         </Link>
       </StyledContent>
+      <StyledImageContainer imgUrl={result.background_image} />
     </StyledCard>
   );
 };
