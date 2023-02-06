@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledCard = styled.div`
+  position: relative;
   height: 400px;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
@@ -33,12 +34,16 @@ export const StyledImageContainer = styled.div`
 `;
 
 export const StyledContent = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   padding: 0 1rem 1rem 1rem;
+  background-color: rgba(51, 51, 51, 0.6);
 
   h2 {
     width: 100%;
@@ -47,7 +52,7 @@ export const StyledContent = styled.div`
     text-align: center;
     font-size: 18px;
     font-weight: 600;
-    border-top: 1px solid lightgray;
+    color: #f3f3f3;
   }
 
   .button {

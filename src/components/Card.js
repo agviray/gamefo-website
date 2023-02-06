@@ -10,7 +10,7 @@ const Card = ({ result }) => {
   return (
     <StyledCard>
       <StyledImageContainer imgUrl={result.background_image} />
-      {/* <StyledContent>
+      <StyledContent>
         <h2>{result.name}</h2>
         <Link
           to={`/details/${result.name}`}
@@ -20,7 +20,7 @@ const Card = ({ result }) => {
         >
           <span className="button">View page</span>
         </Link>
-      </StyledContent> */}
+      </StyledContent>
     </StyledCard>
   );
 };
