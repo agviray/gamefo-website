@@ -46,7 +46,6 @@ export const StyledControls = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    z-index: 1;
 
     .control {
       display: inline-block;

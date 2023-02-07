@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
 import {
   StyledCarousel,
   StyledControls,
@@ -8,6 +9,11 @@ import {
 
 const Carousel = ({ name, screenshots }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  const swipedHandlers = useSwipeable({
+    onSwipedLeft: () => updateActiveImageIndex(activeImageIndex + 1),
+    onSwipedRight: () => updateActiveImageIndex(activeImageIndex - 1),
+  });
 
   const updateActiveImageIndex = (newIndex) => {
     if (newIndex < 0) {
@@ -23,6 +29,7 @@ const Carousel = ({ name, screenshots }) => {
       <StyledCarousel>
         <div className="content">
           <div
+            {...swipedHandlers}
             style={{ transform: `translateX(-${activeImageIndex * 100}%)` }}
             className="items"
           >
