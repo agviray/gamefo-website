@@ -27,92 +27,53 @@ export const StyledCarousel = styled.div`
 `;
 
 export const StyledControls = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  padding-top: 1.25rem;
 
-  &:hover .content > .control {
-    background-color: rgba(51, 51, 51, 0.5);
-    cursor: pointer;
-  }
+  .control {
+    display: inline-block;
 
-  .content {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+    &:hover {
+      cursor: pointer;
+    }
 
-    .control {
-      display: inline-block;
-      padding: 10px;
-      background-color: rgba(51, 51, 51, 0);
-      transition: all 0.3s;
+    .prev,
+    .next {
+      display: block;
+      padding: 5px;
+      border-width: 2px 2px 0 0;
+      border-style: solid;
+      border-color: #333333;
+    }
 
-      &:nth-child(1) {
-        margin-left: 5px;
-      }
+    .prev {
+      transform: translateX(7px) rotate(-135deg);
+    }
 
-      &:nth-child(2) {
-        margin-right: 5px;
-      }
+    .next {
+      transform: translateX(-6px) rotate(45deg);
+    }
 
-      .prev,
-      .next {
-        display: block;
-        padding: 10px;
-        border-width: 3px 3px 0 0;
-        border-style: solid;
-        border-color: rgba(243, 243, 243, 1);
-        transition: all 0.3s;
-      }
-
-      .prev {
-        transform: translateX(7px) rotate(-135deg);
-      }
-
-      .next {
-        transform: translateX(-6px) rotate(45deg);
-      }
-
-      &.disabled {
-        visibility: hidden;
-      }
+    &.disabled {
+      visibility: hidden;
     }
   }
 `;
 
 export const StyledIndicators = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding-bottom: 5px;
+  display: inline-block;
+  padding: 0 1.25rem;
 
-  .content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px 10px;
-    background-color: rgba(51, 51, 51, 0.4);
+  span {
+    display: inline-block;
+    font-size: 14px;
+  }
 
-    span {
-      display: inline-block;
-      color: #f3f3f3;
-      font-size: 14px;
-    }
-
-    .line {
-      color: #f3f3f3;
-      padding: 0 7px;
-    }
+  .line {
+    padding: 0 7px;
   }
 `;
 
@@ -130,6 +91,10 @@ export const StyledThumbnails = styled.div`
     width: 25%;
     max-width: 200px;
     padding-bottom: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     &.activeImage::after {
       content: '';
