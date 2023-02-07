@@ -12,12 +12,13 @@ export const StyledCarousel = styled.div`
       transition: transform 0.3s;
 
       .imgContainer {
-        display: inline-block;
+        display: flex;
         justify-content: center;
         align-items: center;
         min-width: 100%;
 
         img {
+          display: inline-block;
           width: 100%;
         }
       }
@@ -77,6 +78,10 @@ export const StyledControls = styled.div`
 
       .next {
         transform: translateX(-6px) rotate(45deg);
+      }
+
+      &.disabled {
+        visibility: hidden;
       }
     }
   }
