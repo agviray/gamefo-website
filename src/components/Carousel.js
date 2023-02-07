@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyledCarousel } from './styles/Carousel.styled';
+import { StyledCarousel, StyledControls } from './styles/Carousel.styled';
 
 const Carousel = ({ name, screenshots }) => {
   return (
@@ -12,6 +12,16 @@ const Carousel = ({ name, screenshots }) => {
             </div>
           ))}
         </div>
+        <StyledControls>
+          <div className="content">
+            <div className="control">
+              <span className="prev"></span>
+            </div>
+            <div className="control">
+              <span className="next"></span>
+            </div>
+          </div>
+        </StyledControls>
       </div>
     </StyledCarousel>
   );
