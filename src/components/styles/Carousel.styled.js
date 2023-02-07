@@ -86,3 +86,34 @@ export const StyledControls = styled.div`
     }
   }
 `;
+
+export const StyledThumbnails = styled.div`
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding-top: 1.25rem;
+
+  div {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 25%;
+    max-width: 200px;
+    padding-bottom: 10px;
+
+    &.activeImage::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #333333;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+`;

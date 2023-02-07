@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { StyledCarousel, StyledControls } from './styles/Carousel.styled';
+import {
+  StyledCarousel,
+  StyledControls,
+  StyledThumbnails,
+} from './styles/Carousel.styled';
 
 const Carousel = ({ name, screenshots }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -14,38 +18,51 @@ const Carousel = ({ name, screenshots }) => {
   };
 
   return (
-    <StyledCarousel>
-      <div className="content">
-        <div
-          style={{ transform: `translateX(-${activeImageIndex * 100}%)` }}
-          className="items"
-        >
-          {screenshots.map((img, index) => (
-            <div key={img.id} className="imgContainer">
-              <img src={img.image} alt={`${name} screenshot ${index}`} />
-            </div>
-          ))}
-        </div>
-        <StyledControls>
-          <div className="content">
-            <div
-              className={`control ${activeImageIndex <= 0 ? 'disabled' : ''}`}
-              onClick={() => updateActiveImageIndex(activeImageIndex - 1)}
-            >
-              <span className="prev"></span>
-            </div>
-            <div
-              className={`control ${
-                activeImageIndex >= screenshots.length - 1 ? 'disabled' : ''
-              }`}
-              onClick={() => updateActiveImageIndex(activeImageIndex + 1)}
-            >
-              <span className="next"></span>
-            </div>
+    <>
+      <StyledCarousel>
+        <div className="content">
+          <div
+            style={{ transform: `translateX(-${activeImageIndex * 100}%)` }}
+            className="items"
+          >
+            {screenshots.map((img, index) => (
+              <div key={img.id} className="imgContainer">
+                <img src={img.image} alt={`${name} screenshot ${index}`} />
+              </div>
+            ))}
           </div>
-        </StyledControls>
-      </div>
-    </StyledCarousel>
+          <StyledControls>
+            <div className="content">
+              <div
+                className={`control ${activeImageIndex <= 0 ? 'disabled' : ''}`}
+                onClick={() => updateActiveImageIndex(activeImageIndex - 1)}
+              >
+                <span className="prev"></span>
+              </div>
+              <div
+                className={`control ${
+                  activeImageIndex >= screenshots.length - 1 ? 'disabled' : ''
+                }`}
+                onClick={() => updateActiveImageIndex(activeImageIndex + 1)}
+              >
+                <span className="next"></span>
+              </div>
+            </div>
+          </StyledControls>
+        </div>
+      </StyledCarousel>
+      <StyledThumbnails>
+        {screenshots.map((img, index) => (
+          <div
+            key={index}
+            className={activeImageIndex === index ? 'activeImage' : ''}
+            onClick={() => updateActiveImageIndex(index)}
+          >
+            <img src={img.image} alt={`${name} thumbnail ${index}`} />
+          </div>
+        ))}
+      </StyledThumbnails>
+    </>
   );
 };
 
