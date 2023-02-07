@@ -7,8 +7,10 @@ export const StyledGameDetails = styled.div`
 export const StyledHero = styled.div`
   position: relative;
 
-  img {
-    width: 100%;
+  .content {
+    img {
+      width: 100%;
+    }
   }
 `;
 

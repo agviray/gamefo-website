@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import Carousel from './Carousel';
 import {
   StyledGameDetails,
   StyledContent,
@@ -23,7 +24,9 @@ const GameDetails = () => {
       setGame({
         name: selectedGame.name,
         bgImg: selectedGame.background_image,
-        esrbRating: selectedGame.esrb_rating.name_en,
+        esrbRating: selectedGame.esrb_rating
+          ? selectedGame.esrb_rating.name
+          : '---',
         screenshots: [...selectedGame.short_screenshots],
       });
     }
@@ -43,11 +46,7 @@ const GameDetails = () => {
         <span>{game.esrbRating}</span>
         <br />
         <br />
-        {game.screenshots.map((img, index) => (
-          <div key={img.id}>
-            <img src={img.image} alt={`${game.name} screenshot ${index}`} />
-          </div>
-        ))}
+        <Carousel name={game.name} screenshots={game.screenshots} />
       </StyledContent>
     </StyledGameDetails>
   );
