@@ -87,6 +87,36 @@ export const StyledControls = styled.div`
   }
 `;
 
+export const StyledIndicators = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 5px;
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: rgba(51, 51, 51, 0.4);
+
+    span {
+      display: inline-block;
+      color: #f3f3f3;
+      font-size: 14px;
+    }
+
+    .line {
+      color: #f3f3f3;
+      padding: 0 7px;
+    }
+  }
+`;
+
 export const StyledThumbnails = styled.div`
   display: flex;
   align-items: stretch;

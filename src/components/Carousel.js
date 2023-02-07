@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   StyledCarousel,
   StyledControls,
+  StyledIndicators,
   StyledThumbnails,
 } from './styles/Carousel.styled';
 
@@ -49,6 +50,13 @@ const Carousel = ({ name, screenshots }) => {
               </div>
             </div>
           </StyledControls>
+          <StyledIndicators>
+            <div className="content">
+              <span className="current">{activeImageIndex + 1}</span>
+              <span className="line">|</span>
+              <span className="all">{screenshots.length}</span>
+            </div>
+          </StyledIndicators>
         </div>
       </StyledCarousel>
       <StyledThumbnails>
