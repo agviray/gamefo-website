@@ -47,7 +47,9 @@ const GameDetails = () => {
         genres: data.genres ? [...data.genres] : [],
         description: data.description,
         bgImg: data.background_image,
-        bgImgExtra: data.background_image_additional,
+        bgImgExtra: data.background_image_additional
+          ? data.background_image_additional
+          : null,
         esrbRating: data.esrb_rating ? data.esrb_rating.name : '---',
         screenshots: [...selectedGame.short_screenshots],
       });
@@ -63,7 +65,9 @@ const GameDetails = () => {
       <StyledHero>
         <div className="content">
           <img src={game.bgImg} alt={`${game.name}`} />
-          <img src={game.bgImgExtra} alt={`${game.name}`} />
+          {game.bgImgExtra === null ? null : (
+            <img src={game.bgImgExtra} alt={`${game.name}`} />
+          )}
         </div>
       </StyledHero>
       <StyledContent>
