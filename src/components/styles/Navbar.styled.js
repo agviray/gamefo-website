@@ -2,14 +2,18 @@ import styled from 'styled-components';
 
 export const StyledWrapper = styled.div`
   position: relative;
-  height: 162px;
+  height: 76px;
+
+  @media screen and (min-width: 950px) {
+    height: 145px;
+  }
 
   .container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 2.5rem 0;
+    padding: 1rem 1.25rem;
     background-color: #ffffff;
     z-index: 1;
   }
@@ -18,13 +22,25 @@ export const StyledWrapper = styled.div`
 export const StyledNavContent = styled.div`
   max-width: 1000px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+
+  @media screen and (min-width: 950px) {
+    display: block;
+  }
 
   .headingBlock {
     display: flex;
     justify-content: center;
-    padding-bottom: 3rem;
+
+    @media screen and (min-width: 950px) {
+      font-size: 2rem;
+      padding-bottom: 2rem;
+    }
 
     h1 {
+      font-size: unset;
       display: inline-block;
     }
   }

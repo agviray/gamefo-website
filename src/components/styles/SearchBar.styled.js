@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 export const StyledContent = styled.div`
+  width: 80%;
+  margin: 0 auto;
+
   .formContent {
     position: relative;
     display: flex;
     align-items: center;
-    width: 80%;
-    margin: 0 auto;
     padding: 0.75rem 0.75rem;
     box-shadow: ${({ inputHasFocus }) =>
       inputHasFocus
