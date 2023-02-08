@@ -8,6 +8,7 @@ import {
 } from './styles/GameDetails.styled';
 
 const initialGame = {
+  id: null,
   name: '',
   released: '',
   platforms: [],
@@ -25,6 +26,7 @@ const GameDetails = () => {
   useEffect(() => {
     if (Object.keys(game).length !== 0) {
       setGame({
+        id: selectedGame.id,
         name: selectedGame.name,
         released: selectedGame.released,
         platforms: [...selectedGame.platforms],
