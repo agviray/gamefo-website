@@ -62,7 +62,8 @@ export const StyledContent = styled.div`
 `;
 
 export const StyledDescription = styled.div`
-  padding-top: 1.25rem;
+  padding-top: 2rem;
+
   h3 {
     font-size: 18px;
 
@@ -96,4 +97,8 @@ export const StyledDescription = styled.div`
       }
     }
   }
+`;
+
+export const StyledScreenshots = styled.div`
+  padding-top: 2rem;
 `;

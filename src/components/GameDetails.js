@@ -8,6 +8,7 @@ import {
   StyledInnerWrapper,
   StyledContent,
   StyledDescription,
+  StyledScreenshots,
 } from './styles/GameDetails.styled';
 
 const initialGame = {
@@ -97,7 +98,11 @@ const GameDetails = () => {
               ></div>
             </StyledDescription>
           </section>
-          <Carousel name={game.name} screenshots={game.screenshots} />
+          <section>
+            <StyledScreenshots>
+              <Carousel name={game.name} screenshots={game.screenshots} />
+            </StyledScreenshots>
+          </section>
         </StyledContent>
       </StyledInnerWrapper>
     </StyledGameDetails>
