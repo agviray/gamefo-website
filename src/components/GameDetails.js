@@ -63,12 +63,9 @@ const GameDetails = () => {
 
   return (
     <StyledGameDetails>
-      <StyledHero>
+      <StyledHero imgUrl={game.bgImg}>
         <div className="content">
-          <img src={game.bgImg} alt={`${game.name}`} />
-          {/* {game.bgImgExtra === null ? null : (
-            <img src={game.bgImgExtra} alt={`${game.name}`} />
-          )} */}
+          <div className="heroImage" />
         </div>
       </StyledHero>
       <StyledWrapper>

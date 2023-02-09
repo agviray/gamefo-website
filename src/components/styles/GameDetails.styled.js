@@ -6,13 +6,15 @@ export const StyledGameDetails = styled.div`
 
 export const StyledHero = styled.div`
   position: relative;
+  height: 100%;
   overflow: hidden;
 
   .content {
     position: relative;
+    height: 50vh;
 
     @media screen and (min-width: 950px) {
-      height: 50vh;
+      height: 70vh;
     }
 
     &::before {
@@ -28,8 +30,16 @@ export const StyledHero = styled.div`
       );
     }
 
-    img {
-      width: 100%;
+    .heroImage {
+      background-image: url(${({ imgUrl }) => imgUrl});
+      background-position: center bottom;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100%;
+
+      @media screen and (min-width: 1300px) {
+        background-position: center top;
+      }
     }
   }
 `;

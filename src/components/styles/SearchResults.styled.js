@@ -5,7 +5,11 @@ export const StyledContainer = styled.div`
   max-width: 1600px;
   margin-left: auto;
   margin-right: auto;
-  padding: 4rem 1.25rem;
+  padding: 140px 1.25rem 4rem 1.25rem;
+
+  @media screen and (min-width: 950px) {
+    padding: 209px 1.25rem 4rem 1.25rem;
+  }
 `;
 
 export const StyledResultsList = styled.div`
