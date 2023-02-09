@@ -3,9 +3,10 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import Carousel from './Carousel';
 import {
+  StyledWrapper,
   StyledGameDetails,
-  StyledContent,
   StyledHero,
+  StyledContent,
 } from './styles/GameDetails.styled';
 
 const initialGame = {
@@ -65,44 +66,46 @@ const GameDetails = () => {
       <StyledHero>
         <div className="content">
           <img src={game.bgImg} alt={`${game.name}`} />
-          {game.bgImgExtra === null ? null : (
+          {/* {game.bgImgExtra === null ? null : (
             <img src={game.bgImgExtra} alt={`${game.name}`} />
-          )}
+          )} */}
         </div>
       </StyledHero>
-      <StyledContent>
-        <h2>{game.name}</h2>
-        <br />
-        <h3>Website</h3>
-        <a href={game.website} target="_blank" rel="noreferrer">
-          {game.website}
-        </a>
-        <br />
-        <br />
-        <h3>Released</h3>
-        <span>{game.released}</span>
-        <br />
-        <br />
-        <h3>Available on</h3>
-        {game.platforms.map(({ platform }) => (
-          <span key={platform.id}>{platform.name}</span>
-        ))}
-        <br />
-        <br />
-        <h3>Genres</h3>
-        {game.genres.map((genre) => (
-          <span key={genre.id}>{genre.name}</span>
-        ))}
-        <br />
-        <br />
-        <h3>ESRB Rating</h3>
-        <span>{game.esrbRating}</span>
-        <br />
-        <br />
-        <p dangerouslySetInnerHTML={{ __html: game.description }} />
-        <br />
-        <Carousel name={game.name} screenshots={game.screenshots} />
-      </StyledContent>
+      <StyledWrapper>
+        <StyledContent>
+          <h2>{game.name}</h2>
+          <br />
+          <h3>Website</h3>
+          <a href={game.website} target="_blank" rel="noreferrer">
+            {game.website}
+          </a>
+          <br />
+          <br />
+          <h3>Released</h3>
+          <span>{game.released}</span>
+          <br />
+          <br />
+          <h3>Available on</h3>
+          {game.platforms.map(({ platform }) => (
+            <span key={platform.id}>{platform.name}</span>
+          ))}
+          <br />
+          <br />
+          <h3>Genres</h3>
+          {game.genres.map((genre) => (
+            <span key={genre.id}>{genre.name}</span>
+          ))}
+          <br />
+          <br />
+          <h3>ESRB Rating</h3>
+          <span>{game.esrbRating}</span>
+          <br />
+          <br />
+          <p dangerouslySetInnerHTML={{ __html: game.description }} />
+          <br />
+          <Carousel name={game.name} screenshots={game.screenshots} />
+        </StyledContent>
+      </StyledWrapper>
     </StyledGameDetails>
   );
 };

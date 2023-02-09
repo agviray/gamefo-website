@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
   display: relative;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4rem 1.25rem;
 `;
 
 export const StyledResultsList = styled.div`

@@ -57,9 +57,7 @@ const Layout = () => {
           <Navbar />
         </header>
         <main>
-          <StyledMainContent>
-            <Outlet />
-          </StyledMainContent>
+          <Outlet />
         </main>
         <footer>
           <span>&copy; footer content</span>

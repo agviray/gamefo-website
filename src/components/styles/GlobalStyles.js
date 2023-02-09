@@ -25,11 +25,4 @@ a {
 }
 `;
 
-export const StyledMainContent = styled.div`
-  max-width: 1600px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 4rem 1.25rem;
-`;
-
 export default GlobalStyles;

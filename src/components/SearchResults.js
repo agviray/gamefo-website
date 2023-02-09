@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyledResultsList } from './styles/SearchResults.styled';
+import {
+  StyledContainer,
+  StyledResultsList,
+} from './styles/SearchResults.styled';
 import { ResponseContext } from './Layout';
 import PageNumbers from './PageNumbers';
 import Card from './Card';
@@ -22,10 +25,10 @@ const SearchResults = () => {
   ));
 
   return results.length === 0 ? null : (
-    <div className="container">
+    <StyledContainer>
       <StyledResultsList>{renderedItems}</StyledResultsList>
       <PageNumbers response={responseContextValue.response} />
-    </div>
+    </StyledContainer>
   );
 };
 
