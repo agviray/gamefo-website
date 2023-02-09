@@ -6,9 +6,27 @@ export const StyledGameDetails = styled.div`
 
 export const StyledHero = styled.div`
   position: relative;
+  overflow: hidden;
 
   .content {
     position: relative;
+
+    @media screen and (min-width: 950px) {
+      height: 50vh;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 1)
+      );
+    }
 
     img {
       width: 100%;
