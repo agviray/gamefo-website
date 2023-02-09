@@ -44,7 +44,7 @@ export const StyledHero = styled.div`
   }
 `;
 
-export const StyledWrapper = styled.div`
+export const StyledInnerWrapper = styled.div`
   max-width: 1600px;
   margin-left: auto;
   margin-right: auto;
@@ -57,6 +57,43 @@ export const StyledContent = styled.div`
   div {
     img {
       width: 100%;
+    }
+  }
+`;
+
+export const StyledDescription = styled.div`
+  padding-top: 1.25rem;
+  h3 {
+    font-size: 18px;
+
+    @media screen and (min-width: 950px) {
+      font-size: 25px;
+    }
+  }
+  .innerContainer {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: 16px;
+      padding-top: 1rem;
+    }
+
+    p {
+      padding-top: 1rem;
+    }
+
+    @media screen and (min-width: 950px) {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-size: 20px;
+      }
     }
   }
 `;
