@@ -44,33 +44,22 @@ export const StyledHero = styled.div`
   }
 `;
 
-export const StyledInnerWrapper = styled.div`
-  max-width: 1600px;
+export const StyledInnerContainer = styled.div`
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
   padding: 4rem 1.25rem;
-`;
-
-export const StyledContent = styled.div`
   overflow-wrap: break-word;
 
-  div {
-    img {
-      width: 100%;
-    }
-  }
-`;
-
-export const StyledDescription = styled.div`
-  padding-top: 2rem;
-
-  h3 {
-    font-size: 18px;
+  h2.name {
+    padding-bottom: 1.5rem;
+    font-size: 20px;
 
     @media screen and (min-width: 950px) {
-      font-size: 25px;
+      font-size: 30px;
     }
   }
+
   .innerContainer {
     h1,
     h2,
@@ -95,6 +84,40 @@ export const StyledDescription = styled.div`
       h6 {
         font-size: 20px;
       }
+    }
+  }
+`;
+
+export const StyledDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 950px) {
+    flex-direction: row;
+    gap: 4rem;
+  }
+
+  .innerContainer {
+    h3 {
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  .platforms,
+  .genres {
+    display: flex;
+    gap: 5px;
+  }
+`;
+
+export const StyledDescription = styled.div`
+  padding-top: 2rem;
+
+  h3 {
+    font-size: 18px;
+
+    @media screen and (min-width: 950px) {
+      font-size: 25px;
     }
   }
 `;

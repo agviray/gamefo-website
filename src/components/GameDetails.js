@@ -5,8 +5,8 @@ import Carousel from './Carousel';
 import {
   StyledGameDetails,
   StyledHero,
-  StyledInnerWrapper,
-  StyledContent,
+  StyledInnerContainer,
+  StyledDetails,
   StyledDescription,
   StyledScreenshots,
 } from './styles/GameDetails.styled';
@@ -65,46 +65,70 @@ const GameDetails = () => {
 
   return (
     <StyledGameDetails>
-      <StyledHero imgUrl={game.bgImg}>
-        <div className="content">
-          <div className="heroImage" />
-        </div>
-      </StyledHero>
-      <StyledInnerWrapper>
-        <StyledContent>
-          <h2>{game.name}</h2>
-          <h3>Website</h3>
-          <a href={game.website} target="_blank" rel="noreferrer">
-            {game.website}
-          </a>
-          <h3>Released</h3>
-          <span>{game.released}</span>
-          <h3>Available on</h3>
-          {game.platforms.map(({ platform }) => (
-            <span key={platform.id}>{platform.name}</span>
-          ))}
-          <h3>Genres</h3>
-          {game.genres.map((genre) => (
-            <span key={genre.id}>{genre.name}</span>
-          ))}
-          <h3>ESRB Rating</h3>
-          <span>{game.esrbRating}</span>
+      <section>
+        <StyledHero imgUrl={game.bgImg}>
+          <div className="content">
+            <div className="heroImage" />
+          </div>
+        </StyledHero>
+      </section>
+      <section>
+        <StyledInnerContainer>
           <section>
-            <StyledDescription>
-              <h3>About</h3>
-              <div
-                className="innerContainer"
-                dangerouslySetInnerHTML={{ __html: game.description }}
-              ></div>
-            </StyledDescription>
+            <article>
+              <h2 className="name">{game.name}</h2>
+              <StyledDetails>
+                <div className="innerContainer">
+                  <h3>Website</h3>
+                  <a href={game.website} target="_blank" rel="noreferrer">
+                    {game.website}
+                  </a>
+                  <h3>Released</h3>
+                  <span>{game.released}</span>
+                  <h3>Available on</h3>
+                  <div className="platforms">
+                    {game.platforms.map(({ platform }, index, platforms) => {
+                      return index === platforms.length - 1 ? (
+                        <span key={platform.id}>{platform.name}</span>
+                      ) : (
+                        <span key={platform.id}>{platform.name},</span>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className="innerContainer">
+                  <h3>Genres</h3>
+                  <div className="genres">
+                    {game.genres.map((genre, index, genres) => {
+                      return index === genres.length - 1 ? (
+                        <span key={index}>{genre.name}</span>
+                      ) : (
+                        <span key={index}>{genre.name},</span>
+                      );
+                    })}
+                  </div>
+                  <h3>ESRB Rating</h3>
+                  <span>{game.esrbRating}</span>
+                </div>
+              </StyledDetails>
+            </article>
+            <article>
+              <StyledDescription>
+                <h3>About</h3>
+                <div
+                  className="innerContainer"
+                  dangerouslySetInnerHTML={{ __html: game.description }}
+                ></div>
+              </StyledDescription>
+            </article>
           </section>
           <section>
             <StyledScreenshots>
               <Carousel name={game.name} screenshots={game.screenshots} />
             </StyledScreenshots>
           </section>
-        </StyledContent>
-      </StyledInnerWrapper>
+        </StyledInnerContainer>
+      </section>
     </StyledGameDetails>
   );
 };
