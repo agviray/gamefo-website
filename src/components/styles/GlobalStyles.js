@@ -9,7 +9,8 @@ const GlobalStyles = createGlobalStyle`
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  color: #333333;
+  color: #f3f3f3;
+  background-color: #2b2b2b;
 }
 
 ul {
@@ -21,7 +22,7 @@ ul {
 
 a {
   text-decoration: none;
-  color: #333333;
+  color: #f3f3f3;
 }
 `;
 
