@@ -60,7 +60,9 @@ const SearchBar = () => {
           >
             <label htmlFor="SearchInput">Search</label>
             <div className={'magnifyingGlassContainer'}>
-              <MagnifyingGlass color={`${inputHasFocus ? 'red' : '#333333'}`} />
+              <MagnifyingGlass
+                color={`${inputHasFocus ? '#0d48e4' : '#333333'}`}
+              />
             </div>
             <input
               ref={inputRef}

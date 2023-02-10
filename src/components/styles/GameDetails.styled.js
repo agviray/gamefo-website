@@ -95,6 +95,9 @@ export const StyledDetails = styled.div`
   }
 
   .innerContainer {
+    @media screen and (min-width: 950px) {
+      width: 50%;
+    }
     h3 {
       padding-bottom: 0.5rem;
     }
@@ -103,6 +106,7 @@ export const StyledDetails = styled.div`
   .platforms,
   .genres {
     display: flex;
+    flex-wrap: wrap;
     gap: 5px;
   }
 `;

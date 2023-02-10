@@ -46,7 +46,7 @@ export const StyledControls = styled.div`
       padding: 3px;
       border-width: 1px 1px 0 0;
       border-style: solid;
-      border-color: #333333;
+      border-color: #f3f3f3;
     }
 
     .prev {
