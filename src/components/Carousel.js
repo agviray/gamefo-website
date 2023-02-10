@@ -28,6 +28,14 @@ const Carousel = ({ name, screenshots }) => {
     <>
       <StyledCarousel>
         <div className="content">
+          <div className="prevArrowContainer">
+            <div
+              className="box"
+              onClick={() => updateActiveImageIndex(activeImageIndex - 1)}
+            >
+              <div className="prev"></div>
+            </div>
+          </div>
           <div
             {...swipedHandlers}
             style={{ transform: `translateX(-${activeImageIndex * 100}%)` }}
@@ -38,6 +46,14 @@ const Carousel = ({ name, screenshots }) => {
                 <img src={img.image} alt={`${name} screenshot ${index}`} />
               </div>
             ))}
+          </div>
+          <div className="nextArrowContainer">
+            <div
+              className="box"
+              onClick={() => updateActiveImageIndex(activeImageIndex + 1)}
+            >
+              <div className="next"></div>
+            </div>
           </div>
         </div>
       </StyledCarousel>

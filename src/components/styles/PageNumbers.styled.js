@@ -28,7 +28,7 @@ export const StyledContainer = styled.div`
 
       .active {
         font-weight: 700;
-        border-bottom: 2px solid #333333;
+        border-bottom: 2px solid #f3f3f3;
       }
     }
   }

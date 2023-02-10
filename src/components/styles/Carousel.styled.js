@@ -7,6 +7,59 @@ export const StyledCarousel = styled.div`
   .content {
     display: relative;
 
+    @media screen and (min-width: 950px) {
+      .prevArrowContainer,
+      .nextArrowContainer {
+        position: absolute;
+        width: 30px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .prevArrowContainer {
+        top: 0;
+        left: 0;
+      }
+
+      .nextArrowContainer {
+        top: 0;
+        right: 0;
+      }
+
+      .box {
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(51, 51, 51, 0.7);
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .prev,
+      .next {
+        width: 20px;
+        height: 20px;
+        border-width: 2px 2px 0 0;
+        border-style: solid;
+        border-color: #f3f3f3;
+      }
+
+      .prev {
+        transform: translateX(4px) rotate(-135deg);
+      }
+
+      .next {
+        transform: translateX(-4px) rotate(45deg);
+      }
+    }
+
     .items {
       display: flex;
       transition: transform 0.3s;
