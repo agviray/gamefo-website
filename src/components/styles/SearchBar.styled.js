@@ -14,10 +14,12 @@ export const StyledContent = styled.div`
         ? '0px 5px 8px 3px rgba(79,79,79,0.5)'
         : '0px 2px 5px 0px rgba(51,51,51,0.5)'};
     border-radius: 40px;
-    background-color: #ffffffff;
+    background-color: ${({ inputHasFocus }) =>
+      inputHasFocus ? 'rgba(243,243,243, 1)' : 'rgba(243,243,243, 0.5)'};
     transition: all 0.3s ease;
 
     &:hover {
+      background-color: rgba(243, 243, 243, 1);
       box-shadow: 0px 5px 8px 3px rgba(79, 79, 79, 0.5);
     }
 
@@ -42,6 +44,10 @@ export const StyledContent = styled.div`
       width: 100%;
       font-family: inherit;
       font-size: inherit;
+
+      &::placeholder {
+        color: lightgray;
+      }
     }
   }
 `;
