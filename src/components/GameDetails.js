@@ -65,6 +65,19 @@ const GameDetails = () => {
     }
   }, []);
 
+  // *** About formatDescription ***
+  // - Formats the api's description response (<br/> being used, causing
+  //   text to not be displayed properly)
+  const formatDescription = (desc) => {
+    let description = desc.replaceAll('<br />', '</p><p>');
+    return (
+      <div
+        className="innerContainer"
+        dangerouslySetInnerHTML={{ __html: description }}
+      ></div>
+    );
+  };
+
   return (
     <StyledGameDetails>
       <section>
@@ -124,10 +137,7 @@ const GameDetails = () => {
             <article>
               <StyledDescription>
                 <h3>About</h3>
-                <div
-                  className="innerContainer"
-                  dangerouslySetInnerHTML={{ __html: game.description }}
-                ></div>
+                {formatDescription(game.description)}
               </StyledDescription>
             </article>
           </section>
