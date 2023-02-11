@@ -14,8 +14,9 @@ import {
 const initialGame = {
   id: null,
   name: '',
-  website: '',
   released: '',
+  website: '',
+  developers: [],
   platforms: [],
   genres: [],
   description: '',
@@ -45,6 +46,7 @@ const GameDetails = () => {
         id: data.id,
         name: data.name,
         website: data.website ? data.website : '---',
+        developers: data.developers ? [...data.developers] : [],
         released: data.released,
         platforms: [...data.platforms],
         genres: data.genres ? [...data.genres] : [],
@@ -77,14 +79,35 @@ const GameDetails = () => {
           <section>
             <article>
               <h2 className="name">{game.name}</h2>
+              <div className="genres">
+                {game.genres.map((genre, index, genres) => (
+                  <span className="container" key={index}>
+                    <span>{genre.name}</span>
+                  </span>
+                ))}
+              </div>
               <StyledDetails>
                 <div className="innerContainer">
+                  <h3>Released</h3>
+                  <span>{game.released}</span>
+                  <h3>Developers</h3>
+                  <div className="developers">
+                    {game.developers.map((developer, index, developers) => {
+                      return index === developers.length - 1 ? (
+                        <span key={index}>{developer.name}</span>
+                      ) : (
+                        <span key={index}>{developer.name},</span>
+                      );
+                    })}
+                  </div>
                   <h3>Website</h3>
                   <a href={game.website} target="_blank" rel="noreferrer">
                     {game.website}
                   </a>
-                  <h3>Released</h3>
-                  <span>{game.released}</span>
+                </div>
+                <div className="innerContainer">
+                  <h3>ESRB Rating</h3>
+                  <span>{game.esrbRating}</span>
                   <h3>Available on</h3>
                   <div className="platforms">
                     {game.platforms.map(({ platform }, index, platforms) => {
@@ -95,20 +118,6 @@ const GameDetails = () => {
                       );
                     })}
                   </div>
-                </div>
-                <div className="innerContainer">
-                  <h3>Genres</h3>
-                  <div className="genres">
-                    {game.genres.map((genre, index, genres) => {
-                      return index === genres.length - 1 ? (
-                        <span key={index}>{genre.name}</span>
-                      ) : (
-                        <span key={index}>{genre.name},</span>
-                      );
-                    })}
-                  </div>
-                  <h3>ESRB Rating</h3>
-                  <span>{game.esrbRating}</span>
                 </div>
               </StyledDetails>
             </article>

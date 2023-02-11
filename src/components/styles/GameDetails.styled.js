@@ -49,11 +49,34 @@ export const StyledInnerContainer = styled.div`
   overflow-wrap: break-word;
 
   h2.name {
-    padding-bottom: 1.5rem;
-    font-size: 20px;
+    padding-bottom: 1rem;
+    font-size: 25px;
 
     @media screen and (min-width: 950px) {
       font-size: 30px;
+    }
+  }
+
+  .genres,
+  .developers,
+  .platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .genres {
+    padding-bottom: 1.5rem;
+
+    span.container {
+      display: inline-block;
+      padding: 7px 20px;
+      border: 1px solid #f3f3f3;
+      border-radius: 40px;
+
+      span {
+        display: inline-block;
+      }
     }
   }
 
@@ -101,13 +124,6 @@ export const StyledDetails = styled.div`
     h3 {
       padding-bottom: 0.5rem;
     }
-  }
-
-  .platforms,
-  .genres {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
   }
 `;
 
