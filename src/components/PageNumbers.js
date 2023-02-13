@@ -5,65 +5,26 @@ import {
 } from './styles/PageNumbers.styled';
 import { ResponseContext } from './Layout';
 
-const initialResponseDetails = {
-  currentSearchedTerm: '',
-  currentPageRequested: null,
-  resultsFound: null,
-};
-
 const initialPageDetails = {
-  resultsPerPage: 20,
+  currentSearchedTerm: '',
   currentPageNum: null,
   finalPageNum: null,
+  resultsFound: null,
   pageNumsToShow: [],
 };
 
 const PageNumbers = ({ response }) => {
-  const [responseDetails, setResponseDetails] = useState(
-    initialResponseDetails
-  );
   const [pageDetails, setPageDetails] = useState(initialPageDetails);
   const responseContextValue = useContext(ResponseContext);
 
   useEffect(() => {
-    const resetPageNumbers = () => {
-      setPageDetails(initialPageDetails);
-      setResponseDetails(initialResponseDetails);
-    };
-
-    const updateResponseDetails = (res) => {
-      const currentSearchedTerm = res.termSearched;
-      const currentPageRequested = res.pageRequested;
-      const resultsFound = res.dataReceived.count;
-      setResponseDetails({
-        currentSearchedTerm: currentSearchedTerm,
-        currentPageRequested: currentPageRequested,
-        resultsFound: resultsFound,
-      });
-    };
-
-    if (response.termSearched !== responseDetails.currentSearchedTerm) {
-      resetPageNumbers();
-    }
-
-    if (Object.keys(response.dataReceived).length !== 0) {
-      updateResponseDetails(response);
-    }
-  }, [response]);
-
-  // *************************
-  // About setNewPageDetails
-  // *************************
-  // - Responsible setting pageDetails whenever a new search term is submitted.
-  // - This includes setting the current range of numbers displayed at the bottom
-  //   of the page.
-  useEffect(() => {
-    const setNewPageDetails = (page) => {
+    const setNewPageDetails = (response) => {
       const totalPageNumsToShow = 5;
+      const resultsPerPage = 20;
       const finalPageNum = Math.ceil(
-        responseDetails.resultsFound / pageDetails.resultsPerPage
+        response.dataReceived.count / resultsPerPage
       );
-      const currentRangeNums = pageDetails.pageNumsToShow;
+      const currentRangeNums = response.pageRange;
       let newPageNumsToShow = [];
 
       if (currentRangeNums.length === 0) {
@@ -74,90 +35,100 @@ const PageNumbers = ({ response }) => {
             break;
           }
         }
-        setPageDetails({
-          ...pageDetails,
-          currentPageNum: page,
-          finalPageNum: finalPageNum,
-          pageNumsToShow: [...newPageNumsToShow],
-        });
+      } else {
+        newPageNumsToShow = [...currentRangeNums];
       }
+
+      setPageDetails({
+        currentSearchedTerm: response.termSearched,
+        currentPageNum: response.pageRequested,
+        finalPageNum: finalPageNum,
+        resultsFound: response.dataReceived.count,
+        pageNumsToShow: [...newPageNumsToShow],
+      });
     };
 
-    // ***************************
-    // About updatePageNumsToShow
-    // ***************************
-    // - Responsible for updating the current range of numbers displayed at the
-    //   bottom of the page.
-    // - The range of numbers must not exceed 5--this is just the max numbers that
-    //   want to show in the range =).
-    // - The numbers in the range are updated accordingly, depending on the current
-    //   page number, and whether the prev/next button is clicked.
-    const updatePageNumsToShow = (page) => {
-      const totalPageNumsToShow = 5;
-      const currentRangeNums = pageDetails.pageNumsToShow;
-      const firstRangeNum = currentRangeNums[0];
-      const lastRangeNum = currentRangeNums[currentRangeNums.length - 1];
-      let newPageNumsToShow = [];
+    if (response.termSearched !== pageDetails.currentSearchedTerm) {
+      setNewPageDetails(response);
+    }
+  }, [response]);
 
-      if (currentRangeNums.includes(page)) {
-        setPageDetails({
-          ...pageDetails,
-          currentPageNum: page,
-        });
-        return;
-      }
-
-      if (!currentRangeNums.includes(page)) {
-        for (let i = 0; i < totalPageNumsToShow; i++) {
-          if (page < firstRangeNum) {
-            newPageNumsToShow[i] = page - i;
-          }
-          if (page > lastRangeNum) {
-            if (page + i <= pageDetails.finalPageNum) {
-              newPageNumsToShow[i] = page + i;
-            } else {
-              break;
-            }
-          }
-        }
-        newPageNumsToShow.sort((a, b) => {
-          return a - b;
-        });
-        setPageDetails({
-          ...pageDetails,
-          currentPageNum: page,
-          pageNumsToShow: [...newPageNumsToShow],
-        });
-      }
+  useEffect(() => {
+    const updateResponse = (term, pageNum, pageRange) => {
+      responseContextValue.onResponseChange(term, pageNum, pageRange);
     };
 
-    if (responseDetails.resultsFound === null) {
+    if (pageDetails.currentSearchedTerm === '') {
       return;
     }
 
-    if (responseDetails.currentPageRequested !== null) {
-      if (pageDetails.pageNumsToShow.length === 0) {
-        setNewPageDetails(responseDetails.currentPageRequested);
-      } else {
-        updatePageNumsToShow(responseDetails.currentPageRequested);
-      }
+    if (pageDetails.currentPageNum !== response.pageRequested) {
+      updateResponse(
+        pageDetails.currentSearchedTerm,
+        pageDetails.currentPageNum,
+        pageDetails.pageNumsToShow
+      );
     }
-  }, [responseDetails]);
-
-  useEffect(() => {
-    console.log(pageDetails);
   }, [pageDetails]);
 
-  const goToPrevPage = (term, page) => {
-    responseContextValue.onResponseChange(term, page.currentPageNum - 1);
+  // ***************************
+  // About updatePageNumsToShow
+  // ***************************
+  // - Responsible for updating the current range of numbers displayed at the
+  //   bottom of the page.
+  // - The range of numbers must not exceed 5--this is just the max numbers that
+  //   want to show in the range =).
+  // - The numbers in the range are updated accordingly, depending on the current
+  //   page number, and whether the prev/next button is clicked.
+  const updatePageNumsToShow = (page) => {
+    const totalPageNumsToShow = 5;
+    const currentRangeNums = pageDetails.pageNumsToShow;
+    const firstRangeNum = currentRangeNums[0];
+    const lastRangeNum = currentRangeNums[currentRangeNums.length - 1];
+    let newPageNumsToShow = [];
+
+    if (currentRangeNums.includes(page)) {
+      setPageDetails({
+        ...pageDetails,
+        currentPageNum: page,
+      });
+      return;
+    }
+
+    if (!currentRangeNums.includes(page)) {
+      for (let i = 0; i < totalPageNumsToShow; i++) {
+        if (page < firstRangeNum) {
+          newPageNumsToShow[i] = page - i;
+        }
+        if (page > lastRangeNum) {
+          if (page + i <= pageDetails.finalPageNum) {
+            newPageNumsToShow[i] = page + i;
+          } else {
+            break;
+          }
+        }
+      }
+      newPageNumsToShow.sort((a, b) => {
+        return a - b;
+      });
+      setPageDetails({
+        ...pageDetails,
+        currentPageNum: page,
+        pageNumsToShow: [...newPageNumsToShow],
+      });
+    }
   };
 
-  const goToNextPage = (term, page) => {
-    responseContextValue.onResponseChange(term, page.currentPageNum + 1);
+  const goToPrevPage = (page) => {
+    updatePageNumsToShow(page.currentPageNum - 1);
   };
 
-  const goToPage = (term, pageNum) => {
-    responseContextValue.onResponseChange(term, pageNum);
+  const goToNextPage = (page) => {
+    updatePageNumsToShow(page.currentPageNum + 1);
+  };
+
+  const goToPage = (pageNum) => {
+    updatePageNumsToShow(pageNum);
   };
 
   const renderContent = (page) => {
@@ -166,13 +137,7 @@ const PageNumbers = ({ response }) => {
         <StyledPageController
           className={`prev ${page.currentPageNum === 1 ? 'hidden' : ''}`}
         >
-          <span
-            onClick={() =>
-              goToPrevPage(responseDetails.currentSearchedTerm, page)
-            }
-          >
-            Prev
-          </span>
+          <span onClick={() => goToPrevPage(page)}>Prev</span>
         </StyledPageController>
         <div className={'pageNumbers'}>
           {page.pageNumsToShow.map((num, index) => (
@@ -181,7 +146,7 @@ const PageNumbers = ({ response }) => {
               className={`${
                 num !== pageDetails.currentPageNum ? 'inactive' : 'active'
               }`}
-              onClick={() => goToPage(responseDetails.currentSearchedTerm, num)}
+              onClick={() => goToPage(num)}
             >
               {num}
             </span>
@@ -192,13 +157,7 @@ const PageNumbers = ({ response }) => {
             page.currentPageNum === page.finalPageNum ? 'hidden' : ''
           }`}
         >
-          <span
-            onClick={() =>
-              goToNextPage(responseDetails.currentSearchedTerm, page)
-            }
-          >
-            Next
-          </span>
+          <span onClick={() => goToNextPage(page)}>Next</span>
         </StyledPageController>
       </>
     );

@@ -35,7 +35,7 @@ const SearchBar = () => {
     e.preventDefault();
     const term = searchParameters.term;
     const page = 1;
-    responseContextValue.onResponseChange(term, page);
+    responseContextValue.onResponseChange(term, page, []);
   };
 
   const onInputChange = (e) => {

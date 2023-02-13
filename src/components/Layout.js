@@ -11,13 +11,14 @@ export const ResponseContext = createContext(null);
 const initialResponse = {
   termSearched: '',
   pageRequested: null,
+  pageRange: [],
   dataReceived: {},
 };
 
 const Layout = () => {
   const [response, setResponse] = useState(initialResponse);
 
-  const updateResponse = async (term, pageNum) => {
+  const updateResponse = async (term, pageNum, pageRange) => {
     const apiResponse = await axios.get('http://localhost:4000/games', {
       params: {
         search: term,
@@ -29,20 +30,10 @@ const Layout = () => {
     setResponse({
       termSearched: term,
       pageRequested: pageNum,
+      pageRange: [...pageRange],
       dataReceived: { ...apiResponse.data },
     });
   };
-
-  useEffect(() => {
-    console.log(`
-    #######################################
-    THE CURRENT TERM SEARCHED IS: 
-    ${response.termSearched}
-    THE CURRENT PAGE OF RESULTS IS PAGE: 
-    ${response.pageRequested}
-    #######################################
-    `);
-  }, [response]);
 
   return (
     <>
