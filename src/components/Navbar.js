@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { StyledWrapper, StyledNavContent } from './styles/Navbar.styled';
+import {
+  StyledWrapper,
+  StyledNavContent,
+  StyledErrorMessage,
+} from './styles/Navbar.styled';
 import SearchBar from './SearchBar';
 import MagnifyingGlass from './MagnifyingGlass';
 
 const Navbar = () => {
+  const [isInputEmpty, setIsInputEmpty] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const { pathname } = useLocation();
 
@@ -15,6 +20,10 @@ const Navbar = () => {
       setIsHidden(true);
     }
   }, [pathname]);
+
+  const updateIsInputEmpty = (status) => {
+    setIsInputEmpty(status);
+  };
 
   return (
     <StyledWrapper>
@@ -29,7 +38,17 @@ const Navbar = () => {
               </Link>
             </div>
             {isHidden ? (
-              <SearchBar />
+              <div className="searchBlock">
+                <SearchBar
+                  isInputEmpty={isInputEmpty}
+                  onIsInputEmptyChange={updateIsInputEmpty}
+                />
+                {isInputEmpty ? (
+                  <StyledErrorMessage>
+                    Enter a valid video game title
+                  </StyledErrorMessage>
+                ) : null}
+              </div>
             ) : (
               <div className="searchBlock">
                 <Link to="/search">

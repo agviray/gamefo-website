@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledContent = styled.div`
-  width: 80%;
-  margin: 0 auto;
-
   .formContent {
     position: relative;
     display: flex;
