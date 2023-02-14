@@ -10,8 +10,38 @@ const initialGameTrailer = {
 };
 
 const HomePage = () => {
-  const [gameTrailer, setGameTrailer] = useState({ ...initialGameTrailer });
+  const [games, setGames] = useState([]);
+  // const [gameTrailer, setGameTrailer] = useState({ ...initialGameTrailer });
 
+  useEffect(() => {
+    const getGames = async () => {
+      const d = new Date();
+      const month =
+        d.getMonth() + 1 < 10 ? `0${d.getMonth() + 1}` : d.getMonth() + 1;
+      const date = d.getDate() < 10 ? `0${d.getDate()}` : d.getDate();
+      const currentYear = d.getFullYear().toString();
+      const prevYear = (currentYear - 1).toString();
+      const dateRange = `${prevYear}-${month}-${date},${currentYear}-${month}-${date}`;
+      const apiResponse = await axios.get('http://localhost:4000/games', {
+        params: {
+          dates: dateRange,
+          ordering: '-added',
+        },
+      });
+
+      const results = apiResponse.data.results;
+      setGames([...results]);
+    };
+
+    if (games.length === 0) {
+      getGames();
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(games);
+  }, [games]);
+  /*
   useEffect(() => {
     const getGameTrailer = async (id) => {
       const apiResponse = await axios.get('http://localhost:4000/games', {
@@ -30,10 +60,11 @@ const HomePage = () => {
       getGameTrailer(3498);
     }
   }, []);
-
-  useEffect(() => {
-    console.log(gameTrailer);
-  }, [gameTrailer]);
+  
+    useEffect(() => {
+      console.log(gameTrailer);
+    }, [gameTrailer]);
+  */
 
   return (
     <StyledHomePage>
