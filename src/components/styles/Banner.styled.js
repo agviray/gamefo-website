@@ -23,7 +23,7 @@ export const StyledBanner = styled.div`
     height: 100%;
     display: flex;
     animation-name: ${panRight};
-    animation-duration: 30s;
+    animation-duration: 40s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
   }
@@ -33,4 +33,16 @@ export const StyledImageContainer = styled.div`
   position: relative;
   width: 40vw;
   height: 100%;
+`;
+
+export const StyledImage = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url(${({ imgUrl }) => imgUrl});
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
 `;

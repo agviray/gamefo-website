@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { StyledHomePage, StyledSlideImage } from './styles/HomePage.styled';
+import { StyledHomePage } from './styles/HomePage.styled';
 import Banner from './Banner';
 
 const initialGameTrailer = {
@@ -45,9 +45,7 @@ const HomePage = () => {
     const imageContents = games.map((game, index) => {
       const image = {
         title: `image #${index + 1}`,
-        content: () => (
-          <StyledSlideImage imgUrl={game.background_image}></StyledSlideImage>
-        ),
+        imageUrl: game.background_image,
       };
 
       return image;
