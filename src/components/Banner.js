@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import {
   StyledBanner,
   StyledImageContainer,
@@ -7,21 +7,23 @@ import {
 
 // *** Scrolls HORIZONTALLY ***
 const Banner = ({ images }) => {
-  const initialSlides = [
-    {
-      content: () =>
-        images.map((image) => (
-          <StyledImageContainer key={image.title}>
-            <StyledImage imgUrl={image.imageUrl}></StyledImage>
-          </StyledImageContainer>
-        )),
-    },
-  ];
-
   return (
     <StyledBanner>
-      <div className="content">
-        {initialSlides.map((slide) => slide.content())}
+      <div className="innerContainer">
+        <div className="content">
+          {images.map((image) => (
+            <StyledImageContainer key={image.title}>
+              <StyledImage imgUrl={image.imageUrl}></StyledImage>
+            </StyledImageContainer>
+          ))}
+        </div>
+        <div className="content">
+          {images.map((image) => (
+            <StyledImageContainer key={image.title}>
+              <StyledImage imgUrl={image.imageUrl}></StyledImage>
+            </StyledImageContainer>
+          ))}
+        </div>
       </div>
     </StyledBanner>
   );

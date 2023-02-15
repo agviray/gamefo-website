@@ -11,21 +11,25 @@ const panRight = keyframes`
 `;
 
 export const StyledBanner = styled.div`
-  position: relative;
-  width: 100%;
-  height: 25vh;
-  overflow: hidden;
+  display: relative;
 
-  .content {
+  .innerContainer {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%;
+    width: 100%;
+    height: 25vh;
+    overflow: hidden;
+    display: flex;
+  }
+
+  .content {
     display: flex;
     animation-name: ${panRight};
-    animation-duration: 40s;
+    animation-duration: 500s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+    padding-bottom: 1rem;
   }
 `;
 
