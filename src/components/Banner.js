@@ -9,21 +9,19 @@ import {
 const Banner = ({ images }) => {
   return (
     <StyledBanner>
-      <div className="innerContainer">
-        <div className="content">
-          {images.map((image) => (
-            <StyledImageContainer key={image.title}>
-              <StyledImage imgUrl={image.imageUrl}></StyledImage>
-            </StyledImageContainer>
-          ))}
-        </div>
-        <div className="content">
-          {images.map((image) => (
-            <StyledImageContainer key={image.title}>
-              <StyledImage imgUrl={image.imageUrl}></StyledImage>
-            </StyledImageContainer>
-          ))}
-        </div>
+      <div className="content">
+        {images.map((image) => (
+          <StyledImageContainer key={image.title}>
+            <StyledImage imgUrl={image.imageUrl}></StyledImage>
+          </StyledImageContainer>
+        ))}
+      </div>
+      <div className="content">
+        {images.map((image) => (
+          <StyledImageContainer key={image.title}>
+            <StyledImage imgUrl={image.imageUrl}></StyledImage>
+          </StyledImageContainer>
+        ))}
       </div>
     </StyledBanner>
   );

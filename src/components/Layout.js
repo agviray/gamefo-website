@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import GlobalStyles, {
   StyledMainContent,
 } from '../components/styles/GlobalStyles';
@@ -16,7 +16,17 @@ const initialResponse = {
 };
 
 const Layout = () => {
+  const [isNavbarHidden, setIsNavbarHidden] = useState(false);
   const [response, setResponse] = useState(initialResponse);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname === '/') {
+      setIsNavbarHidden(true);
+    } else {
+      setIsNavbarHidden(false);
+    }
+  }, [pathname]);
 
   const updateResponse = async (term, pageNum, pageRange) => {
     const apiResponse = await axios.get('http://localhost:4000/games', {
@@ -44,9 +54,7 @@ const Layout = () => {
           onResponseChange: updateResponse,
         }}
       >
-        <header>
-          <Navbar />
-        </header>
+        <header>{isNavbarHidden ? null : <Navbar />}</header>
         <main>
           <Outlet />
         </main>

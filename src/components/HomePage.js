@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { StyledHomePage } from './styles/HomePage.styled';
+import { StyledHomePage, StyledSearchBlock } from './styles/HomePage.styled';
 import Banner from './Banner';
+import MagnifyingGlass from './MagnifyingGlass';
 
 const initialGameTrailer = {
   data: {},
@@ -87,7 +89,34 @@ const HomePage = () => {
   return (
     <StyledHomePage>
       <section>
-        <Banner images={images} />
+        <div className="hero">
+          <div className="banner1">
+            <Banner images={images} />
+          </div>
+          <div className="content">
+            <div className="innerContainer">
+              <h1>Game-Fo</h1>
+              <p>Welcome to Game-Fo, a video game information database!</p>
+              <p>
+                Start browsing our selection by clicking below and entering a
+                video game title.
+              </p>
+              <StyledSearchBlock>
+                <Link to="/search">
+                  <div className="searchBlockContent">
+                    <div className="magnifyingGlassContainer">
+                      <MagnifyingGlass />
+                    </div>
+                    <span>Looking for something?</span>
+                  </div>
+                </Link>
+              </StyledSearchBlock>
+            </div>
+          </div>
+          <div className="banner2">
+            <Banner images={images} />
+          </div>
+        </div>
       </section>
       <div className="content"></div>
     </StyledHomePage>
