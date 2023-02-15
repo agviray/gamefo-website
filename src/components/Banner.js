@@ -5,11 +5,13 @@ import { StyledBanner, StyledImageContainer } from './styles/Banner.styled';
 const Banner = ({ images }) => {
   return (
     <StyledBanner>
-      {images.map((image) => (
-        <StyledImageContainer key={image.title}>
-          {image.content()}
-        </StyledImageContainer>
-      ))}
+      <div className="content">
+        {images.map((image) => (
+          <StyledImageContainer key={image.title}>
+            {image.content()}
+          </StyledImageContainer>
+        ))}
+      </div>
     </StyledBanner>
   );
 };
