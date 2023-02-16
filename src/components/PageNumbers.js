@@ -194,7 +194,12 @@ const PageNumbers = ({ response }) => {
 
   return (
     <StyledContainer>
-      <div className="content">{renderContent(pageDetails)}</div>
+      <div className="content">
+        <div className="pageMap">
+          {`Page ${pageDetails.currentPageNum} of ${pageDetails.finalPageNum}`}
+        </div>
+        {renderContent(pageDetails)}
+      </div>
     </StyledContainer>
   );
 };

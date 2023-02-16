@@ -7,6 +7,10 @@ export const StyledContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    .pageMap {
+      padding-bottom: 1.5rem;
+    }
   }
 `;
 
