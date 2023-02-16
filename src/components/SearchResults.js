@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {
-  StyledContainer,
-  StyledResultsList,
-} from './styles/SearchResults.styled';
+import { StyledContainer, StyledResults } from './styles/SearchResults.styled';
 import { ResponseContext } from './Layout';
 import PageNumbers from './PageNumbers';
 import Card from './Card';
@@ -26,7 +23,22 @@ const SearchResults = () => {
 
   return results.length === 0 ? null : (
     <StyledContainer>
-      <StyledResultsList>{renderedItems}</StyledResultsList>
+      <div className="info">
+        <span>
+          Found{' '}
+          {responseContextValue.response.dataReceived.count.toLocaleString(
+            'en-US'
+          )}{' '}
+          results for "
+          {
+            <span className="term">
+              {responseContextValue.response.termSearched}
+            </span>
+          }
+          "
+        </span>
+      </div>
+      <StyledResults>{renderedItems}</StyledResults>
       <PageNumbers response={responseContextValue.response} />
     </StyledContainer>
   );

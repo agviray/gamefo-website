@@ -10,9 +10,20 @@ export const StyledContainer = styled.div`
   @media screen and (min-width: 950px) {
     padding: 209px 1.25rem 4rem 1.25rem;
   }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
+    color: #7d7d7d;
+
+    .term {
+      font-style: italic;
+    }
+  }
 `;
 
-export const StyledResultsList = styled.div`
+export const StyledResults = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 100%);
   gap: 30px;
