@@ -18,14 +18,20 @@ const HomePage = () => {
   // const [gameTrailer, setGameTrailer] = useState({ ...initialGameTrailer });
 
   useEffect(() => {
-    const getGames = async () => {
+    const getGames = async (earlierYear, laterYear) => {
       const d = new Date();
       const month =
         d.getMonth() + 1 < 10 ? `0${d.getMonth() + 1}` : d.getMonth() + 1;
       const date = d.getDate() < 10 ? `0${d.getDate()}` : d.getDate();
       const currentYear = d.getFullYear().toString();
       const prevYear = (currentYear - 1).toString();
-      const dateRange = `${prevYear}-${month}-${date},${currentYear}-${month}-${date}`;
+      let dateRange;
+
+      if (!earlierYear && !laterYear) {
+        dateRange = `${prevYear}-${month}-${date},${currentYear}-${month}-${date}`;
+      } else {
+        dateRange = `${earlierYear}-${month}-${date},${laterYear}-${month}-${date}`;
+      }
       const apiResponse = await axios.get('http://localhost:4000/games', {
         params: {
           dates: dateRange,
