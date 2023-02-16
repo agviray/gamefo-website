@@ -34,6 +34,7 @@ export const StyledHomePage = styled.div`
         max-width: 1000px;
         width: 80%;
         margin: 0 auto;
+        /* padding: 100px 0; */
 
         h1 {
           padding-bottom: 2rem;

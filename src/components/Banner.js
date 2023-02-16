@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyledBanner,
   StyledImageContainer,
@@ -6,20 +6,27 @@ import {
 } from './styles/Banner.styled';
 
 // *** Scrolls HORIZONTALLY ***
-const Banner = ({ images }) => {
+const Banner = ({ bannerGroup, isReverse }) => {
+  const [urls, setUrls] = useState([]);
+  useEffect(() => {
+    if (bannerGroup) {
+      setUrls([...bannerGroup.imageUrls]);
+    }
+  }, [bannerGroup]);
+
   return (
-    <StyledBanner>
+    <StyledBanner isReverse={isReverse}>
       <div className="content">
-        {images.map((image) => (
-          <StyledImageContainer key={image.title}>
-            <StyledImage imgUrl={image.imageUrl}></StyledImage>
+        {urls.map((url, index) => (
+          <StyledImageContainer key={index}>
+            <StyledImage imgUrl={url}></StyledImage>
           </StyledImageContainer>
         ))}
       </div>
       <div className="content">
-        {images.map((image) => (
-          <StyledImageContainer key={image.title}>
-            <StyledImage imgUrl={image.imageUrl}></StyledImage>
+        {urls.map((url, index) => (
+          <StyledImageContainer key={index}>
+            <StyledImage imgUrl={url}></StyledImage>
           </StyledImageContainer>
         ))}
       </div>

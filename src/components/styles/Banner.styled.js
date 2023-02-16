@@ -20,6 +20,8 @@ export const StyledBanner = styled.div`
     animation-duration: 500s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+    animation-direction: ${({ isReverse }) =>
+      isReverse ? 'reverse' : 'normal'};
   }
 `;
 

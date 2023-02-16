@@ -5,16 +5,15 @@ import { StyledHomePage, StyledSearchBlock } from './styles/HomePage.styled';
 import Banner from './Banner';
 import MagnifyingGlass from './MagnifyingGlass';
 
-const initialGameTrailer = {
-  data: {},
-  id: null,
-  name: '',
-  preview: '',
-};
+// const initialGameTrailer = {
+//   data: {},
+//   id: null,
+//   name: '',
+//   preview: '',
+// };
 
 const HomePage = () => {
-  const [games, setGames] = useState([]);
-  const [images, setImages] = useState([]);
+  const [bannerGroups, setBannerGroups] = useState([]);
   // const [gameTrailer, setGameTrailer] = useState({ ...initialGameTrailer });
 
   useEffect(() => {
@@ -32,6 +31,7 @@ const HomePage = () => {
       } else {
         dateRange = `${earlierYear}-${month}-${date},${laterYear}-${month}-${date}`;
       }
+
       const apiResponse = await axios.get('http://localhost:4000/games', {
         params: {
           dates: dateRange,
@@ -40,33 +40,33 @@ const HomePage = () => {
       });
 
       const results = apiResponse.data.results;
-      setGames([...results]);
+      const urls = results.map((result) => result.background_image);
+
+      if (bannerGroups.length === 0) {
+        setBannerGroups([
+          {
+            group: 1,
+            imageUrls: [...urls],
+          },
+        ]);
+      } else {
+        setBannerGroups([
+          ...bannerGroups,
+          {
+            group: 2,
+            imageUrls: [...urls],
+          },
+        ]);
+      }
     };
 
-    if (games.length === 0) {
+    if (bannerGroups.length === 0) {
       getGames();
+    } else if (bannerGroups.length === 1) {
+      getGames(2000, 2010);
     }
-  }, []);
+  }, [bannerGroups]);
 
-  useEffect(() => {
-    console.log(games);
-    const imageContents = games.map((game, index) => {
-      const image = {
-        title: `image #${index + 1}`,
-        imageUrl: game.background_image,
-      };
-
-      return image;
-    });
-
-    if (images.length === 0) {
-      setImages([...imageContents]);
-    }
-  }, [games]);
-
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
   /*
   useEffect(() => {
     const getGameTrailer = async (id) => {
@@ -97,7 +97,7 @@ const HomePage = () => {
       <section>
         <div className="hero">
           <div className="banner1">
-            <Banner images={images} />
+            <Banner bannerGroup={bannerGroups[0]} isReverse={false} />
           </div>
           <div className="content">
             <div className="innerContainer">
@@ -120,7 +120,7 @@ const HomePage = () => {
             </div>
           </div>
           <div className="banner2">
-            <Banner images={images} />
+            <Banner bannerGroup={bannerGroups[1]} isReverse={true} />
           </div>
         </div>
       </section>
