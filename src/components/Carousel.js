@@ -30,7 +30,7 @@ const Carousel = ({ name, screenshots }) => {
         <div className="content">
           <div className="prevArrowContainer">
             <div
-              className="box"
+              className={`box ${activeImageIndex <= 0 ? 'disabled' : ''}`}
               onClick={() => updateActiveImageIndex(activeImageIndex - 1)}
             >
               <div className="prev"></div>
@@ -49,7 +49,9 @@ const Carousel = ({ name, screenshots }) => {
           </div>
           <div className="nextArrowContainer">
             <div
-              className="box"
+              className={`box ${
+                activeImageIndex >= screenshots.length - 1 ? 'disabled' : ''
+              }`}
               onClick={() => updateActiveImageIndex(activeImageIndex + 1)}
             >
               <div className="next"></div>

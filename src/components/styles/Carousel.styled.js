@@ -37,6 +37,10 @@ export const StyledCarousel = styled.div`
         height: 40px;
         background-color: rgba(51, 51, 51, 0.7);
 
+        &.disabled {
+          visibility: hidden;
+        }
+
         &:hover {
           cursor: pointer;
         }
