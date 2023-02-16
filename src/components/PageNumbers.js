@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import {
   StyledContainer,
+  StyledNumbers,
+  StyledControllers,
   StyledPageController,
 } from './styles/PageNumbers.styled';
 import { ResponseContext } from './Layout';
@@ -120,6 +122,9 @@ const PageNumbers = ({ response }) => {
   };
 
   const goToPrevPage = (page) => {
+    if (page.currentPageNum === 1) {
+      return;
+    }
     updatePageNumsToShow(page.currentPageNum - 1);
   };
 
@@ -128,6 +133,9 @@ const PageNumbers = ({ response }) => {
   };
 
   const goToNextPage = (page) => {
+    if (page.currentPageNum === page.finalPageNum) {
+      return;
+    }
     updatePageNumsToShow(page.currentPageNum + 1);
   };
 
@@ -143,12 +151,7 @@ const PageNumbers = ({ response }) => {
   const renderContent = (page) => {
     return (
       <>
-        <StyledPageController
-          className={`prev ${page.currentPageNum === 1 ? 'hidden' : ''}`}
-        >
-          <span onClick={() => goToPrevPage(page)}>Prev</span>
-        </StyledPageController>
-        <div className={'pageNumbers'}>
+        <StyledNumbers>
           {pageDetails.pageNumsToShow[0] === 1 ? null : (
             <span onClick={() => goToPrevPageGroup()}>...</span>
           )}
@@ -167,14 +170,24 @@ const PageNumbers = ({ response }) => {
           pageDetails.finalPageNum ? null : (
             <span onClick={() => goToNextPageGroup()}>...</span>
           )}
-        </div>
-        <StyledPageController
-          className={`next ${
-            page.currentPageNum === page.finalPageNum ? 'hidden' : ''
-          }`}
-        >
-          <span onClick={() => goToNextPage(page)}>Next</span>
-        </StyledPageController>
+        </StyledNumbers>
+        <StyledControllers>
+          <span
+            className={`prev ${page.currentPageNum === 1 ? 'disabled' : ''}`}
+            onClick={() => goToPrevPage(page)}
+          >
+            Prev
+          </span>
+          <span>|</span>
+          <span
+            className={`next ${
+              page.currentPageNum === page.finalPageNum ? 'disabled' : ''
+            }`}
+            onClick={() => goToNextPage(page)}
+          >
+            Next
+          </span>
+        </StyledControllers>
       </>
     );
   };
