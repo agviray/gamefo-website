@@ -123,8 +123,17 @@ const PageNumbers = ({ response }) => {
     updatePageNumsToShow(page.currentPageNum - 1);
   };
 
+  const goToPrevPageGroup = () => {
+    updatePageNumsToShow(pageDetails.pageNumsToShow[0] - 1);
+  };
+
   const goToNextPage = (page) => {
     updatePageNumsToShow(page.currentPageNum + 1);
+  };
+
+  const goToNextPageGroup = () => {
+    const currentGroup = [...pageDetails.pageNumsToShow];
+    updatePageNumsToShow(currentGroup[currentGroup.length - 1] + 1);
   };
 
   const goToPage = (pageNum) => {
@@ -140,6 +149,9 @@ const PageNumbers = ({ response }) => {
           <span onClick={() => goToPrevPage(page)}>Prev</span>
         </StyledPageController>
         <div className={'pageNumbers'}>
+          {pageDetails.pageNumsToShow[0] === 1 ? null : (
+            <span onClick={() => goToPrevPageGroup()}>...</span>
+          )}
           {page.pageNumsToShow.map((num, index) => (
             <span
               key={index}
@@ -151,6 +163,10 @@ const PageNumbers = ({ response }) => {
               {num}
             </span>
           ))}
+          {pageDetails.pageNumsToShow[pageDetails.pageNumsToShow.length - 1] ===
+          pageDetails.finalPageNum ? null : (
+            <span onClick={() => goToNextPageGroup()}>...</span>
+          )}
         </div>
         <StyledPageController
           className={`next ${
