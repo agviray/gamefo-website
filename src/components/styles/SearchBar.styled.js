@@ -5,7 +5,9 @@ export const StyledContent = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    padding: 0.75rem 0.75rem;
+    height: 42px;
+    padding-left: 0.75rem;
+    overflow: hidden;
     box-shadow: ${({ inputHasFocus }) =>
       inputHasFocus
         ? '0px 5px 8px 3px rgba(79,79,79,0.5)'
@@ -30,7 +32,7 @@ export const StyledContent = styled.div`
     .magnifyingGlassContainer {
       max-width: 20px;
       max-height: 20px;
-      margin-right: 1rem;
+      margin-right: 0.75rem;
     }
 
     input {
@@ -44,6 +46,21 @@ export const StyledContent = styled.div`
 
       &::placeholder {
         color: lightgray;
+      }
+    }
+
+    .button {
+      height: 100%;
+      background-color: #0d48e4;
+
+      input {
+        padding: 0.75rem 0.75rem;
+        color: #f3f3f3;
+        font-size: 14px;
+      }
+
+      &:hover {
+        background-color: #007bff;
       }
     }
   }

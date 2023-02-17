@@ -19,13 +19,19 @@ const SearchBar = ({
   const [inputHasFocus, setInputHasFocus] = useState(true);
   const inputRef = useRef(null);
   const formContentRef = useRef(null);
+  const buttonRef = useRef(null);
   const responseContextValue = useContext(ResponseContext);
 
   useEffect(() => {
     const onBodyClick = () => {
-      return document.activeElement === inputRef.current
-        ? setInputHasFocus(true)
-        : setInputHasFocus(false);
+      if (
+        document.activeElement === inputRef.current ||
+        document.activeElement === buttonRef.current
+      ) {
+        setInputHasFocus(true);
+      } else {
+        setInputHasFocus(false);
+      }
     };
 
     document.body.addEventListener('click', onBodyClick);
@@ -97,6 +103,16 @@ const SearchBar = ({
               value={searchParameters.term}
               autoFocus
             />
+            {inputHasFocus ? (
+              <span className="button">
+                <input
+                  ref={buttonRef}
+                  type="submit"
+                  value="Search"
+                  onClick={handleSubmit}
+                />
+              </span>
+            ) : null}
           </div>
         </form>
       </StyledContent>

@@ -22,8 +22,6 @@ const Navbar = () => {
     }
   }, [pathname]);
 
-  console.log(isInputActive);
-
   const updateIsInputActive = (status) => {
     setIsInputActive(status);
   };

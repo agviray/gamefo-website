@@ -91,9 +91,6 @@ export const StyledNavContent = styled.div`
 `;
 
 export const StyledErrorMessage = styled.div`
-  position: absolute;
-  bottom: -26px;
-  left: 12px;
   padding-top: 0.5rem;
   color: #007bff;
 `;
