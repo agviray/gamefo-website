@@ -12,7 +12,7 @@ const Card = ({ result }) => {
       <StyledImageContainer imgUrl={result.background_image} />
       <StyledContent>
         <Link
-          to={`/details/${result.name}`}
+          to={`/details/${result.slug}`}
           state={{
             selectedGame: result,
           }}
@@ -21,7 +21,7 @@ const Card = ({ result }) => {
         </Link>
         <div>
           <Link
-            to={`/details/${result.name}`}
+            to={`/details/${result.slug}`}
             state={{
               selectedGame: result,
             }}

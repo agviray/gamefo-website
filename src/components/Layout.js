@@ -1,9 +1,7 @@
 import React, { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
 import { Outlet, useLocation } from 'react-router-dom';
-import GlobalStyles, {
-  StyledMainContent,
-} from '../components/styles/GlobalStyles';
+import GlobalStyles from '../components/styles/GlobalStyles';
 import Navbar from './Navbar';
 
 export const ResponseContext = createContext(null);
@@ -19,6 +17,10 @@ const Layout = () => {
   const [isNavbarHidden, setIsNavbarHidden] = useState(false);
   const [response, setResponse] = useState(initialResponse);
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    console.log(response);
+  }, [response]);
 
   useEffect(() => {
     if (pathname === '/') {
