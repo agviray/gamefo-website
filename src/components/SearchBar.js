@@ -8,7 +8,11 @@ const initialSearchParameters = {
   page: null,
 };
 
-const SearchBar = ({ isInputEmpty, onIsInputEmptyChange }) => {
+const SearchBar = ({
+  isTermValid,
+  onIsTermValidChange,
+  onIsInputActiveChange,
+}) => {
   const [searchParameters, setSearchParameters] = useState(
     initialSearchParameters
   );
@@ -32,10 +36,18 @@ const SearchBar = ({ isInputEmpty, onIsInputEmptyChange }) => {
   }, []);
 
   useEffect(() => {
-    if (isInputEmpty === false) {
+    if (inputHasFocus) {
+      onIsInputActiveChange(true);
+    } else if (!inputHasFocus) {
+      onIsInputActiveChange(false);
+    }
+  }, [inputHasFocus]);
+
+  useEffect(() => {
+    if (isTermValid === false) {
+      onIsTermValidChange(true);
+    } else if (isTermValid === true) {
       return;
-    } else if (isInputEmpty === true) {
-      onIsInputEmptyChange(false);
     }
   }, [searchParameters]);
 
@@ -44,7 +56,7 @@ const SearchBar = ({ isInputEmpty, onIsInputEmptyChange }) => {
     const term = searchParameters.term;
     const page = 1;
     if (searchParameters.term === '') {
-      onIsInputEmptyChange(true);
+      onIsTermValidChange(false);
     } else {
       responseContextValue.onResponseChange(term, page, []);
     }

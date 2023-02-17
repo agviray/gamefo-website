@@ -2,11 +2,6 @@ import styled from 'styled-components';
 
 export const StyledWrapper = styled.div`
   position: relative;
-  /* height: 76px;
-
-  @media screen and (min-width: 950px) {
-    height: 145px;
-  } */
 
   .container {
     position: fixed;
@@ -24,20 +19,35 @@ export const StyledNavContent = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 1.25rem;
+  gap: ${({ isInputActive }) => (isInputActive ? '' : '1.25rem')};
 
   @media screen and (min-width: 950px) {
     display: block;
   }
 
   .headingBlock {
+    width: 20%;
     display: flex;
     justify-content: center;
+    overflow: hidden;
+    transition: width 0.2s linear;
+
+    &.active {
+      width: 0;
+    }
 
     @media screen and (min-width: 950px) {
+      width: auto;
       font-size: 2rem;
       padding-bottom: 2rem;
+      overflow: auto;
+      transition: none;
+
+      &.active {
+        width: auto;
+      }
     }
 
     h1 {
@@ -48,7 +58,7 @@ export const StyledNavContent = styled.div`
 
   .searchBlock {
     position: relative;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
 
     .searchBlockContent {
@@ -59,7 +69,7 @@ export const StyledNavContent = styled.div`
       background-color: rgba(243, 243, 243, 0.5);
       color: lightgray;
       box-shadow: 0px 2px 5px 0px rgba(51, 51, 51, 0.5);
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
 
       &:hover {
         color: lightgray;

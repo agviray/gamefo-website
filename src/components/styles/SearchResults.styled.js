@@ -12,10 +12,9 @@ export const StyledContainer = styled.div`
   }
 
   .info {
-    display: flex;
-    flex-direction: column;
     padding-bottom: 2rem;
     color: #7d7d7d;
+    text-align: center;
 
     .term {
       font-style: italic;

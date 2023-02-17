@@ -24,19 +24,17 @@ const SearchResults = () => {
   return results.length === 0 ? null : (
     <StyledContainer>
       <div className="info">
-        <span>
-          Found{' '}
-          {responseContextValue.response.dataReceived.count.toLocaleString(
-            'en-US'
-          )}{' '}
-          results for "
-          {
-            <span className="term">
-              {responseContextValue.response.termSearched}
-            </span>
-          }
-          "
-        </span>
+        Found{' '}
+        {responseContextValue.response.dataReceived.count.toLocaleString(
+          'en-US'
+        )}{' '}
+        results for "
+        {
+          <span className="term">
+            {responseContextValue.response.termSearched}
+          </span>
+        }
+        "
       </div>
       <StyledResults>{renderedItems}</StyledResults>
       <PageNumbers response={responseContextValue.response} />

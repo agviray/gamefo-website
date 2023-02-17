@@ -9,7 +9,8 @@ import SearchBar from './SearchBar';
 import MagnifyingGlass from './MagnifyingGlass';
 
 const Navbar = () => {
-  const [isInputEmpty, setIsInputEmpty] = useState(false);
+  const [isInputActive, setIsInputActive] = useState(true);
+  const [isTermValid, setIsTermValid] = useState(true);
   const [isHidden, setIsHidden] = useState(false);
   const { pathname } = useLocation();
 
@@ -21,16 +22,22 @@ const Navbar = () => {
     }
   }, [pathname]);
 
-  const updateIsInputEmpty = (status) => {
-    setIsInputEmpty(status);
+  console.log(isInputActive);
+
+  const updateIsInputActive = (status) => {
+    setIsInputActive(status);
+  };
+
+  const updateIsTermValid = (status) => {
+    setIsTermValid(status);
   };
 
   return (
     <StyledWrapper>
       <div className="container">
         <nav>
-          <StyledNavContent>
-            <div className="headingBlock">
+          <StyledNavContent isInputActive={isInputActive}>
+            <div className={`headingBlock ${isInputActive ? 'active' : ''}`}>
               <Link to="/">
                 <h1>
                   <span>Game-Fo</span>
@@ -38,16 +45,17 @@ const Navbar = () => {
               </Link>
             </div>
             {isHidden ? (
-              <div className="searchBlock">
+              <div className={`searchBlock ${isInputActive ? 'active' : ''}`}>
                 <SearchBar
-                  isInputEmpty={isInputEmpty}
-                  onIsInputEmptyChange={updateIsInputEmpty}
+                  isTermValid={isTermValid}
+                  onIsTermValidChange={updateIsTermValid}
+                  onIsInputActiveChange={updateIsInputActive}
                 />
-                {isInputEmpty ? (
+                {isTermValid ? null : (
                   <StyledErrorMessage>
                     Enter a valid video game title
                   </StyledErrorMessage>
-                ) : null}
+                )}
               </div>
             ) : (
               <div className="searchBlock">
