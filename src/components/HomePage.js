@@ -4,6 +4,7 @@ import axios from 'axios';
 import { StyledHomePage, StyledSearchBlock } from './styles/HomePage.styled';
 import Banner from './Banner';
 import MagnifyingGlass from './MagnifyingGlass';
+import Loader from './Loader';
 
 // const initialGameTrailer = {
 //   data: {},
@@ -14,6 +15,7 @@ import MagnifyingGlass from './MagnifyingGlass';
 
 const HomePage = () => {
   const [bannerGroups, setBannerGroups] = useState([]);
+  const [isBannerGroupsLoading, setIsBannerGroupsLoading] = useState(true);
   // const [gameTrailer, setGameTrailer] = useState({ ...initialGameTrailer });
 
   useEffect(() => {
@@ -38,6 +40,8 @@ const HomePage = () => {
           ordering: '-added',
         },
       });
+
+      console.log(apiResponse);
 
       const results = apiResponse.data.results;
       const urls = results.map((result) => result.background_image);
@@ -64,6 +68,8 @@ const HomePage = () => {
       getGames();
     } else if (bannerGroups.length === 1) {
       getGames(2000, 2010);
+    } else if (bannerGroups.length === 2) {
+      setIsBannerGroupsLoading(false);
     }
   }, [bannerGroups]);
 
@@ -94,6 +100,9 @@ const HomePage = () => {
 
   return (
     <StyledHomePage>
+      {bannerGroups.length < 2 ? (
+        <Loader status={isBannerGroupsLoading} message={'Loading..'} />
+      ) : null}
       <section>
         <div className="hero">
           <div className="banner1">

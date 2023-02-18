@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { StyledSquares, StyledLoader } from './styles/Loader.styled';
 
-const Loader = ({ status }) => {
-  const [isActive, setIsActive] = useState(status);
+const Loader = ({ status, message }) => {
+  const [isActive, setIsActive] = useState(true);
+
+  useEffect(() => {
+    if (status !== isActive) {
+      setIsActive(false);
+    }
+  }, [status]);
 
   useEffect(() => {
     if (isActive) {
@@ -22,7 +28,7 @@ const Loader = ({ status }) => {
         <span className="fourth"></span>
         <span className="third"></span>
       </StyledSquares>
-      <span>Loading..</span>
+      <span>{message}</span>
     </StyledLoader>
   ) : null;
 };
