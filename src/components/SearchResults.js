@@ -30,7 +30,9 @@ const SearchResults = () => {
   }, [responseContextValue.response]);
 
   const renderedItems = results.map((result) => (
-    <Card key={result.id} result={result} />
+    <article key={result.id}>
+      <Card result={result} />
+    </article>
   ));
 
   return results.length === 0 ? null : (
@@ -48,8 +50,12 @@ const SearchResults = () => {
         }
         "
       </div>
-      <StyledResults>{renderedItems}</StyledResults>
-      <PageNumbers response={responseContextValue.response} />
+      <section>
+        <StyledResults>{renderedItems}</StyledResults>
+        <article>
+          <PageNumbers response={responseContextValue.response} />
+        </article>
+      </section>
     </StyledContainer>
   );
 };

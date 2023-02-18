@@ -124,7 +124,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <div className="content"></div>
     </StyledHomePage>
   );
 };
