@@ -4,6 +4,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import GlobalStyles from '../components/styles/GlobalStyles';
 import { StyledFooterContent } from './styles/Layout.styled';
 import Navbar from './Navbar';
+import Loader from './Loader';
 
 export const ResponseContext = createContext(null);
 
@@ -15,12 +16,15 @@ const initialResponse = {
 };
 
 const Layout = () => {
+  const [isResponsePending, setIsResponsePending] = useState(false);
   const [isNavbarHidden, setIsNavbarHidden] = useState(false);
   const [response, setResponse] = useState(initialResponse);
   const { pathname } = useLocation();
 
   useEffect(() => {
-    console.log(response);
+    if (isResponsePending === true) {
+      setIsResponsePending(false);
+    }
   }, [response]);
 
   useEffect(() => {
@@ -40,6 +44,7 @@ const Layout = () => {
     });
 
     console.log(apiResponse);
+
     setResponse({
       termSearched: term,
       pageRequested: pageNum,
@@ -48,13 +53,20 @@ const Layout = () => {
     });
   };
 
+  const updateIsResponsePending = (status) => {
+    setIsResponsePending(status);
+  };
+
   return (
     <>
       <GlobalStyles />
+      <Loader status={isResponsePending} message={'Loading..'} />
       <ResponseContext.Provider
         value={{
           response: response,
           onResponseChange: updateResponse,
+          isResponsePending: isResponsePending,
+          onIsResponsePendingChange: updateIsResponsePending,
         }}
       >
         <header>{isNavbarHidden ? null : <Navbar />}</header>

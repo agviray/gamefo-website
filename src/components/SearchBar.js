@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { StyledContent } from './styles/SearchBar.styled';
 import { ResponseContext } from './Layout';
 import MagnifyingGlass from './MagnifyingGlass';
+import useScrollYPosition from './hooks/useScrollYPosition';
 
 const initialSearchParameters = {
   term: '',
@@ -21,6 +22,7 @@ const SearchBar = ({
   const formContentRef = useRef(null);
   const buttonRef = useRef(null);
   const responseContextValue = useContext(ResponseContext);
+  const scrollYPosition = useScrollYPosition();
 
   useEffect(() => {
     const onBodyClick = () => {
@@ -61,9 +63,18 @@ const SearchBar = ({
     e.preventDefault();
     const term = searchParameters.term;
     const page = 1;
+
     if (searchParameters.term === '') {
       onIsTermValidChange(false);
     } else {
+      if (scrollYPosition > 0) {
+        document.documentElement.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'instant',
+        });
+      }
+      responseContextValue.onIsResponsePendingChange(true);
       responseContextValue.onResponseChange(term, page, []);
     }
   };

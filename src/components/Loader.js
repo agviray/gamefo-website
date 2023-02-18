@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { StyledSquares, StyledLoader } from './styles/Loader.styled';
 
 const Loader = ({ status, message }) => {
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState(status);
 
   useEffect(() => {
     if (status !== isActive) {
-      setIsActive(false);
+      setIsActive(!isActive);
     }
   }, [status]);
 
