@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
 import { Outlet, useLocation } from 'react-router-dom';
 import GlobalStyles from '../components/styles/GlobalStyles';
+import { StyledFooterContent } from './styles/Layout.styled';
 import Navbar from './Navbar';
 
 export const ResponseContext = createContext(null);
@@ -61,7 +62,19 @@ const Layout = () => {
           <Outlet />
         </main>
         <footer>
-          <span>&copy; footer content</span>
+          <StyledFooterContent>
+            <span className="apiCredit">
+              All data sourced via{' '}
+              <a
+                href="https://rawg.io/apidocs"
+                target="_blank"
+                rel="noreferrer"
+              >
+                RAWG's
+              </a>{' '}
+              API/database
+            </span>
+          </StyledFooterContent>
         </footer>
       </ResponseContext.Provider>
     </>

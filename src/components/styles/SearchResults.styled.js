@@ -1,14 +1,18 @@
 import styled from 'styled-components';
 
-export const StyledContainer = styled.div`
+export const StyledWrapper = styled.div`
   display: relative;
   max-width: 1600px;
+  min-height: 100vh;
   margin-left: auto;
   margin-right: auto;
-  padding: 140px 1.25rem 4rem 1.25rem;
 
   @media screen and (min-width: 950px) {
     padding: 209px 1.25rem 4rem 1.25rem;
+  }
+
+  .container {
+    padding: 140px 1.25rem 4rem 1.25rem;
   }
 
   .info {
