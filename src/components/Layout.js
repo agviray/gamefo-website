@@ -4,7 +4,6 @@ import { Outlet, useLocation } from 'react-router-dom';
 import GlobalStyles from '../components/styles/GlobalStyles';
 import { StyledFooterContent } from './styles/Layout.styled';
 import Navbar from './Navbar';
-import Loader from './Loader';
 
 export const ResponseContext = createContext(null);
 
@@ -52,7 +51,6 @@ const Layout = () => {
   return (
     <>
       <GlobalStyles />
-      <Loader />
       <ResponseContext.Provider
         value={{
           response: response,

@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-const fadeSquares = keyframes`
+const fade = keyframes`
   0% {
     opacity: 1;
   }
@@ -11,7 +11,11 @@ const fadeSquares = keyframes`
 `;
 
 export const StyledLoader = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,6 +23,14 @@ export const StyledLoader = styled.div`
   gap: 1.5rem;
   z-index: 2;
   background-color: #242424;
+
+  span {
+    color: #83858d;
+    animation-name: ${fade};
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
 `;
 
 export const StyledSquares = styled.div`
@@ -31,7 +43,7 @@ export const StyledSquares = styled.div`
   span {
     width: 20px;
     height: 20px;
-    animation-name: ${fadeSquares};
+    animation-name: ${fade};
     animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
