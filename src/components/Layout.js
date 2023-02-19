@@ -60,7 +60,6 @@ const Layout = () => {
   return (
     <>
       <GlobalStyles />
-      <Loader status={isResponsePending} message={'Loading..'} />
       <ResponseContext.Provider
         value={{
           response: response,
@@ -69,6 +68,7 @@ const Layout = () => {
           onIsResponsePendingChange: updateIsResponsePending,
         }}
       >
+        <Loader status={isResponsePending} message={'Loading..'} />
         <header>{isNavbarHidden ? null : <Navbar />}</header>
         <main>
           <Outlet />

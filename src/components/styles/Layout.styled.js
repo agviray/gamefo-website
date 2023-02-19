@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const StyledWrapper = styled.div`
+  position: relative;
+`;
+
 export const StyledFooterContent = styled.div`
   max-width: 1000px;
   margin-left: auto;

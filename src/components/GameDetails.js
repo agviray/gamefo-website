@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import Carousel from './Carousel';
 import {
   StyledGameDetails,
   StyledHero,
@@ -10,6 +9,8 @@ import {
   StyledDescription,
   StyledScreenshots,
 } from './styles/GameDetails.styled';
+import Carousel from './Carousel';
+import { ResponseContext } from './Layout';
 
 const initialGame = {
   id: null,
@@ -30,6 +31,7 @@ const GameDetails = () => {
   const [game, setGame] = useState({ ...initialGame });
   const location = useLocation();
   const { selectedGame } = location.state;
+  const responseContextValue = useContext(ResponseContext);
 
   useEffect(() => {
     const getGameDetails = async (id) => {
@@ -61,9 +63,14 @@ const GameDetails = () => {
     };
 
     if (selectedGame.id !== game.id) {
+      responseContextValue.onIsResponsePendingChange(true);
       getGameDetails(selectedGame.id);
+    } else if (selectedGame.id === game.id) {
+      if (responseContextValue.isResponsePending === true) {
+        responseContextValue.onIsResponsePendingChange(false);
+      }
     }
-  }, []);
+  }, [game]);
 
   // *** About formatDescription ***
   // - Formats the api's description response (<br/> being used, causing
