@@ -25,6 +25,12 @@ const initialGame = {
   bgImgExtra: '',
   esrbRating: '',
   screenshots: [],
+  trailer: {
+    data: {},
+    id: null,
+    name: '',
+    preview: '',
+  },
 };
 
 const GameDetails = () => {
@@ -45,6 +51,7 @@ const GameDetails = () => {
       console.log(data);
 
       setGame({
+        ...game,
         id: data.id,
         name: data.name,
         website: data.website ? data.website : '---',
@@ -65,7 +72,41 @@ const GameDetails = () => {
     if (selectedGame.id !== game.id) {
       responseContextValue.onIsResponsePendingChange(true);
       getGameDetails(selectedGame.id);
-    } else if (selectedGame.id === game.id) {
+    }
+  }, []);
+
+  useEffect(() => {
+    // *** About getGameTrailer ***
+    // - Get a trailer of the game.
+    const getGameTrailer = async (id) => {
+      const apiResponse = await axios.get('http://localhost:4000/games', {
+        params: {
+          id: id,
+          type: 'movies',
+        },
+      });
+
+      const trailer = apiResponse.data.results[0];
+
+      setGame({
+        ...game,
+        trailer: {
+          ...trailer,
+        },
+      });
+    };
+
+    console.log(game);
+
+    if (game.trailer.id === null) {
+      if (game.id === null) {
+        return;
+      } else {
+        getGameTrailer(game.id);
+      }
+    }
+
+    if (game.trailer.id !== null) {
       if (responseContextValue.isResponsePending === true) {
         responseContextValue.onIsResponsePendingChange(false);
       }

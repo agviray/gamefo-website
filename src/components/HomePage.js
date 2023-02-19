@@ -6,17 +6,9 @@ import Banner from './Banner';
 import MagnifyingGlass from './MagnifyingGlass';
 import Loader from './Loader';
 
-// const initialGameTrailer = {
-//   data: {},
-//   id: null,
-//   name: '',
-//   preview: '',
-// };
-
 const HomePage = () => {
   const [bannerGroups, setBannerGroups] = useState([]);
   const [isBannerGroupsLoading, setIsBannerGroupsLoading] = useState(true);
-  // const [gameTrailer, setGameTrailer] = useState({ ...initialGameTrailer });
 
   useEffect(() => {
     const getGames = async (earlierYear, laterYear) => {
@@ -72,31 +64,6 @@ const HomePage = () => {
       setIsBannerGroupsLoading(false);
     }
   }, [bannerGroups]);
-
-  /*
-  useEffect(() => {
-    const getGameTrailer = async (id) => {
-      const apiResponse = await axios.get('http://localhost:4000/games', {
-        params: {
-          id: id,
-          type: 'movies',
-        },
-      });
-
-      const trailer = apiResponse.data.results[0];
-      setGameTrailer({ ...trailer });
-    };
-
-    if (gameTrailer.id === null) {
-      // Using GTA 5 game id, 3498, for testing.
-      getGameTrailer(3498);
-    }
-  }, []);
-  
-    useEffect(() => {
-      console.log(gameTrailer);
-    }, [gameTrailer]);
-  */
 
   return (
     <StyledHomePage>
