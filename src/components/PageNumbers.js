@@ -3,9 +3,9 @@ import {
   StyledContainer,
   StyledNumbers,
   StyledControllers,
-  StyledPageController,
 } from './styles/PageNumbers.styled';
 import { ResponseContext } from './Layout';
+import useScrollYPosition from './hooks/useScrollYPosition';
 
 const initialPageDetails = {
   currentSearchedTerm: '',
@@ -18,6 +18,7 @@ const initialPageDetails = {
 const PageNumbers = ({ response }) => {
   const [pageDetails, setPageDetails] = useState(initialPageDetails);
   const responseContextValue = useContext(ResponseContext);
+  const scrollYPosition = useScrollYPosition();
 
   useEffect(() => {
     const setNewPageDetails = (response) => {
@@ -65,11 +66,23 @@ const PageNumbers = ({ response }) => {
     }
 
     if (pageDetails.currentPageNum !== response.pageRequested) {
+      if (scrollYPosition > 0) {
+        document.documentElement.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'instant',
+        });
+      }
+      responseContextValue.onIsResponsePendingChange(true);
       updateResponse(
         pageDetails.currentSearchedTerm,
         pageDetails.currentPageNum,
         pageDetails.pageNumsToShow
       );
+    } else if (pageDetails.currentPageNum === response.pageRequested) {
+      if (responseContextValue.isResponsePending === true) {
+        responseContextValue.onIsResponsePendingChange(false);
+      }
     }
   }, [pageDetails]);
 
