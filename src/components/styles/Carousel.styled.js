@@ -160,7 +160,7 @@ export const StyledThumbnails = styled.div`
       left: 0;
       width: 100%;
       height: 2px;
-      background-color: #333333;
+      background-color: #f3f3f3;
     }
 
     img {
