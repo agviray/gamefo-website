@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
 import { Outlet, useLocation } from 'react-router-dom';
 import GlobalStyles from '../components/styles/GlobalStyles';
+import GlobalFonts from '../components/styles/GlobalFonts';
 import { StyledFooterContent } from './styles/Layout.styled';
 import Navbar from './Navbar';
 import Loader from './Loader';
@@ -60,6 +61,7 @@ const Layout = () => {
   return (
     <>
       <GlobalStyles />
+      <GlobalFonts />
       <ResponseContext.Provider
         value={{
           response: response,
