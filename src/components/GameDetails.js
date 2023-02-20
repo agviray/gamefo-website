@@ -10,6 +10,7 @@ import {
   StyledVideos,
   StyledScreenshots,
 } from './styles/GameDetails.styled';
+import Dropdown from './Dropdown';
 import Carousel from './Carousel';
 import Video from './Video';
 import { ResponseContext } from './Layout';
@@ -123,10 +124,12 @@ const GameDetails = () => {
   const formatDescription = (desc) => {
     let description = desc.replaceAll('<br />', '</p><p>');
     return (
-      <div
-        className="innerContainer"
-        dangerouslySetInnerHTML={{ __html: description }}
-      ></div>
+      <Dropdown>
+        <div
+          className="innerContainer"
+          dangerouslySetInnerHTML={{ __html: description }}
+        ></div>
+      </Dropdown>
     );
   };
 
