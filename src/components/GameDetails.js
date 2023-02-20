@@ -7,6 +7,7 @@ import {
   StyledInnerContainer,
   StyledDetails,
   StyledDescription,
+  StyledVideos,
   StyledScreenshots,
 } from './styles/GameDetails.styled';
 import Carousel from './Carousel';
@@ -193,12 +194,14 @@ const GameDetails = () => {
             </article>
           </section>
           <section>
+            {Object.keys(game.trailer).length === 0 ? null : (
+              <StyledVideos>
+                <Video trailer={{ ...game.trailer }} />
+              </StyledVideos>
+            )}
             <StyledScreenshots>
               <Carousel name={game.name} screenshots={game.screenshots} />
             </StyledScreenshots>
-            {Object.keys(game.trailer).length === 0 ? null : (
-              <Video trailer={{ ...game.trailer }} />
-            )}
           </section>
         </StyledInnerContainer>
       </section>

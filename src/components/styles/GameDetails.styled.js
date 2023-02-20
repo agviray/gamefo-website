@@ -139,6 +139,10 @@ export const StyledDescription = styled.div`
   }
 `;
 
+export const StyledVideos = styled.div`
+  padding-top: 2rem;
+`;
+
 export const StyledScreenshots = styled.div`
   padding-top: 2rem;
 `;
