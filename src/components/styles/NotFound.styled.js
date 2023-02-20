@@ -74,7 +74,6 @@ export const StyledNotFound = styled.div`
     }
 
     div {
-      width: 100%;
       display: flex;
       align-items: center;
       gap: 1rem;
