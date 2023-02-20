@@ -14,18 +14,15 @@ const SearchResults = () => {
     if (Object.keys(responseContextValue.response.dataReceived).length === 0) {
       return;
     }
-    if (responseContextValue.response.dataReceived.results[0] !== results[0]) {
-      setResults([...responseContextValue.response.dataReceived.results]);
-    }
-  }, [responseContextValue.response]);
-
-  useEffect(() => {
     if (scrollYPosition > 0) {
       document.documentElement.scrollTo({
         top: 0,
         left: 0,
         behavior: 'instant',
       });
+    }
+    if (responseContextValue.response.dataReceived.results[0] !== results[0]) {
+      setResults([...responseContextValue.response.dataReceived.results]);
     }
   }, [responseContextValue.response]);
 

@@ -133,7 +133,7 @@ const GameDetails = () => {
     );
   };
 
-  return (
+  return game.id === null ? null : (
     <StyledGameDetails>
       <section>
         <StyledHero imgUrl={game.bgImg}>
