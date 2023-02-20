@@ -21,7 +21,7 @@ export const StyledLoader = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-  z-index: 2;
+  z-index: 3;
   background-color: #242424;
 
   span {

@@ -11,7 +11,7 @@ export const StyledWrapper = styled.div`
     padding: 1rem 1.25rem;
     background-color: rgba(43, 43, 43, 0.7);
     backdrop-filter: blur(5px);
-    z-index: 1;
+    z-index: 2;
   }
 `;
 

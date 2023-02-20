@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import {
@@ -8,6 +8,7 @@ import {
   StyledDetails,
   StyledDescription,
   StyledScreenshots,
+  StyledVideoContainer,
 } from './styles/GameDetails.styled';
 import Carousel from './Carousel';
 import { ResponseContext } from './Layout';
@@ -38,6 +39,8 @@ const GameDetails = () => {
   const location = useLocation();
   const { selectedGame } = location.state;
   const responseContextValue = useContext(ResponseContext);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const getGameDetails = async (id) => {
@@ -86,6 +89,8 @@ const GameDetails = () => {
         },
       });
 
+      console.log(apiResponse);
+
       const trailer = apiResponse.data.results[0];
 
       setGame({
@@ -112,6 +117,25 @@ const GameDetails = () => {
       }
     }
   }, [game]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const updateIsVideoPlaying = () => {
+      if (isVideoPlaying === false) {
+        setIsVideoPlaying(true);
+      } else if (isVideoPlaying === true) {
+        setIsVideoPlaying(false);
+      }
+    };
+
+    video.addEventListener('play', updateIsVideoPlaying);
+    video.addEventListener('pause', updateIsVideoPlaying);
+
+    return () => {
+      video.removeEventListener('play', updateIsVideoPlaying);
+      video.removeEventListener('pause', updateIsVideoPlaying);
+    };
+  }, [isVideoPlaying]);
 
   // *** About formatDescription ***
   // - Formats the api's description response (<br/> being used, causing
@@ -193,6 +217,24 @@ const GameDetails = () => {
             <StyledScreenshots>
               <Carousel name={game.name} screenshots={game.screenshots} />
             </StyledScreenshots>
+            {Object.keys(game.trailer).length === 0 ? null : (
+              <StyledVideoContainer>
+                {isVideoPlaying ? null : (
+                  <div className="imageContainer">
+                    <figure>
+                      <img src={game.trailer.preview} alt={game.trailer.name} />
+                    </figure>
+                  </div>
+                )}
+                <video
+                  ref={videoRef}
+                  className="video"
+                  controls
+                  src={game.trailer.data.max}
+                  type="video/mp4"
+                ></video>
+              </StyledVideoContainer>
+            )}
           </section>
         </StyledInnerContainer>
       </section>
