@@ -6,6 +6,7 @@ import GlobalFonts from '../components/styles/GlobalFonts';
 import { StyledFooterContent } from './styles/Layout.styled';
 import Navbar from './Navbar';
 import Loader from './Loader';
+import { getResults } from '../apis/rawg';
 
 export const ResponseContext = createContext(null);
 
@@ -37,12 +38,7 @@ const Layout = () => {
   }, [pathname]);
 
   const updateResponse = async (term, pageNum, pageRange) => {
-    const apiResponse = await axios.get('http://localhost:4000/games', {
-      params: {
-        search: term,
-        page: pageNum,
-      },
-    });
+    const apiResponse = await getResults({ search: term, page: pageNum });
 
     console.log(apiResponse);
 

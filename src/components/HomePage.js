@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { StyledHomePage, StyledSearchBlock } from './styles/HomePage.styled';
 import Banner from './Banner';
 import MagnifyingGlass from './MagnifyingGlass';
 import Loader from './Loader';
+import { getResults } from '../apis/rawg';
 
 const HomePage = () => {
   const [bannerGroups, setBannerGroups] = useState([]);
@@ -26,11 +26,9 @@ const HomePage = () => {
         dateRange = `${earlierYear}-${month}-${date},${laterYear}-${month}-${date}`;
       }
 
-      const apiResponse = await axios.get('http://localhost:4000/games', {
-        params: {
-          dates: dateRange,
-          ordering: '-added',
-        },
+      const apiResponse = await getResults({
+        dates: dateRange,
+        ordering: '-added',
       });
 
       console.log(apiResponse);

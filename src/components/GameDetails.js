@@ -14,6 +14,7 @@ import Dropdown from './Dropdown';
 import Carousel from './Carousel';
 import Video from './Video';
 import { ResponseContext } from './Layout';
+import { getResults } from '../apis/rawg';
 
 const initialGame = {
   id: null,
@@ -45,11 +46,7 @@ const GameDetails = () => {
   useEffect(() => {
     const getGameDetails = async (id) => {
       const stringId = id.toString();
-      const apiResponse = await axios.get('http://localhost:4000/games', {
-        params: {
-          id: stringId,
-        },
-      });
+      const apiResponse = await getResults({ id: stringId });
       const data = apiResponse.data;
       console.log(data);
 
@@ -82,11 +79,9 @@ const GameDetails = () => {
     // *** About getGameTrailer ***
     // - Get a trailer of the game.
     const getGameTrailer = async (id) => {
-      const apiResponse = await axios.get('http://localhost:4000/games', {
-        params: {
-          id: id,
-          type: 'movies',
-        },
+      const apiResponse = await getResults({
+        id: id,
+        type: 'movies',
       });
 
       console.log(apiResponse);
