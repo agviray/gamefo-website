@@ -19,9 +19,7 @@ export const getResults = async (params) => {
         response = await rawg.get(`/games/${gameId}/${type}?key=${KEY}`);
       }
     } else {
-      response = await rawg.get(
-        `/games/${gameId}?key=${process.env.REACT_APP_RAWG_KEY}`
-      );
+      response = await rawg.get(`/games/${gameId}?key=${KEY}`);
     }
   } else {
     response = await rawg.get(`/games?key=${KEY}`, {
