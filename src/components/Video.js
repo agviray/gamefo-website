@@ -7,6 +7,13 @@ const Video = ({ trailer }) => {
   const videoRef = useRef(null);
 
   useEffect(() => {
+    const videoElement = videoRef.current;
+    if (isPlaying === true) {
+      videoElement.play();
+    }
+  }, [isPlaying]);
+
+  useEffect(() => {
     if (trailer.id === null) {
       return;
     } else {
@@ -14,28 +21,24 @@ const Video = ({ trailer }) => {
     }
   }, [trailer]);
 
-  const updateIsVideoPlaying = (playStatus) => {
-    setIsPlaying(!playStatus);
+  const activateInitialPlay = () => {
+    setIsPlaying(true);
   };
 
   return Object.keys(gameTrailer).length === 0 ? null : (
     <StyledVideo>
-      {isPlaying ? null : (
-        <div className="imageContainer">
-          <figure>
-            <img src={gameTrailer.preview} alt={gameTrailer.name} />
-          </figure>
-        </div>
-      )}
       <video
         ref={videoRef}
         className="video"
         controls
         src={gameTrailer.data.max}
         type="video/mp4"
-        onPlay={() => updateIsVideoPlaying(isPlaying)}
-        onPause={() => updateIsVideoPlaying(isPlaying)}
       ></video>
+      {isPlaying ? null : (
+        <div onClick={activateInitialPlay} className="overlay">
+          <div className="playSymbol"></div>
+        </div>
+      )}
     </StyledVideo>
   );
 };
