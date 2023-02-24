@@ -14,8 +14,7 @@ View the demo [here](https://gamefo.netlify.app/), or follow the instructions be
 
 ### Get a RAWG API Key
 
-<em>A RAWG API key is required to locally run this application.</em> You can get a free API key by visiting RAWG's API docs site, https://rawg.io/apidocs.
-
+<em>A RAWG API key is required to locally run this application.</em> You can get a free API key by visiting [RAWG's API docs site](https://rawg.io/apidocs).
 Once you have the key in hand, follow the following installation steps:
 
 #### Step 1 - Clone the repo, then open it in your code editor.
