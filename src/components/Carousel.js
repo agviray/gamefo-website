@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import {
   StyledCarousel,
+  StyledSwiperOverlay,
   StyledControls,
   StyledIndicators,
   StyledThumbnails,
 } from './styles/Carousel.styled';
+import swipeIcon from '../images/swipe-icon.svg';
 
 const Carousel = ({ name, screenshots }) => {
+  const [isOverlayActive, setIsOverlayActive] = useState(true);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   const swipedHandlers = useSwipeable({
@@ -21,6 +24,10 @@ const Carousel = ({ name, screenshots }) => {
     } else if (newIndex >= screenshots.length) {
       newIndex = screenshots.length - 1;
     }
+
+    if (isOverlayActive === true) {
+      setIsOverlayActive(false);
+    }
     setActiveImageIndex(newIndex);
   };
 
@@ -28,6 +35,14 @@ const Carousel = ({ name, screenshots }) => {
     <>
       <StyledCarousel>
         <div className="content">
+          {isOverlayActive ? (
+            <StyledSwiperOverlay onClick={() => setIsOverlayActive(false)}>
+              <div>
+                <img src={swipeIcon} alt="swipe icon" />
+                <span>Got it</span>
+              </div>
+            </StyledSwiperOverlay>
+          ) : null}
           <div className="prevArrowContainer">
             <div
               className={`box ${activeImageIndex <= 0 ? 'disabled' : ''}`}
