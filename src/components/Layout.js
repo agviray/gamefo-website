@@ -40,8 +40,6 @@ const Layout = () => {
   const updateResponse = async (term, pageNum, pageRange) => {
     const apiResponse = await getResults({ search: term, page: pageNum });
 
-    console.log(apiResponse);
-
     setResponse({
       termSearched: term,
       pageRequested: pageNum,

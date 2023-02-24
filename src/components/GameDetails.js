@@ -48,7 +48,6 @@ const GameDetails = () => {
       const stringId = id.toString();
       const apiResponse = await getResults({ id: stringId });
       const data = apiResponse.data;
-      console.log(data);
 
       setGame({
         ...game,
@@ -84,8 +83,6 @@ const GameDetails = () => {
         type: 'movies',
       });
 
-      console.log(apiResponse);
-
       const trailer = apiResponse.data.results[0];
 
       setGame({
@@ -95,8 +92,6 @@ const GameDetails = () => {
         },
       });
     };
-
-    console.log(game);
 
     if (game.trailer.id === null) {
       if (game.id === null) {

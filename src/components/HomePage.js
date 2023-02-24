@@ -31,8 +31,6 @@ const HomePage = () => {
         ordering: '-added',
       });
 
-      console.log(apiResponse);
-
       const results = apiResponse.data.results;
       const urls = results.map((result) => result.background_image);
 
