@@ -8,7 +8,7 @@ GameFo was made with create-react-app. All of the images, videos, and data were 
 
 ## View Demo
 
-View the demo [here](https://gamefo.netlify.app/), or follow the instructions below to run the site on your machine.
+View the demo [here](https://gamefo-demo.netlify.app), or follow the instructions below to run the site on your machine.
 
 ## Installation and Instructions
 
