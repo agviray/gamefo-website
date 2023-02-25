@@ -1,16 +1,32 @@
 # GameFo
 
-<em>GameFo</em> is a mock video game information website.
-
-## About
-
-GameFo was made with create-react-app. All of the images, videos, and data were retrieved via the [RAWG video games database API](https://rawg.io/apidocs).
+<em>GameFo</em> is a video game information website. Enter a video game title in the search bar to view its trailers, images, and other various details.
 
 ## View Demo
 
 To view a demo of the website, click [here](https://gamefo-demo.netlify.app), or enter <em>https://gamefo-demo.netlify.app</em> in your browser's address bar.
 
-Feel free to clone and experiment with the code as well. Follow the steps below for installation and other instructions.
+Feel free to clone and experiment with the code as well. Follow [these steps](#installation-and-instructions) to do so.
+
+## Built with
+
+- create-react-app
+
+- [styled-components](https://styled-components.com/)
+
+  - Used for all styling.
+
+- [RAWG video games database API](https://rawg.io/apidocs)
+
+  - API used to acquire all game media and information.
+
+- [axios](https://www.npmjs.com/package/axios)
+
+  - Handles requests made to RAWG API.
+
+- [react-swipeable](https://www.npmjs.com/package/react-swipeable)
+
+  - Handles swipe event on images when user is on a mobile device.
 
 ## Installation and Instructions
 
