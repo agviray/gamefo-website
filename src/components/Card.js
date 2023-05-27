@@ -8,30 +8,23 @@ import {
 
 const Card = ({ result }) => {
   return (
-    <StyledCard>
-      <StyledImageContainer imgUrl={result.background_image} />
-      <StyledContent>
-        <Link
-          to={`/details/${result.slug}`}
-          state={{
-            selectedGame: result,
-          }}
-        >
+    <Link
+      to={`/details/${result.slug}`}
+      state={{
+        selectedGame: result,
+      }}
+    >
+      <StyledCard>
+        <StyledImageContainer imgUrl={result.background_image} />
+        <StyledContent>
           <h2>{result.name}</h2>
-        </Link>
-        <div>
-          <Link
-            to={`/details/${result.slug}`}
-            state={{
-              selectedGame: result,
-            }}
-          >
+          <div>
             <span className="button">View page</span>
-          </Link>
-        </div>
-      </StyledContent>
-      <StyledImageContainer imgUrl={result.background_image} />
-    </StyledCard>
+          </div>
+        </StyledContent>
+        <StyledImageContainer imgUrl={result.background_image} />
+      </StyledCard>
+    </Link>
   );
 };
 
