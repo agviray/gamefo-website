@@ -38,17 +38,24 @@ const SearchResults = () => {
         <section>
           <div className="container">
             <div className="info">
-              Found{' '}
-              {responseContextValue.response.dataReceived.count.toLocaleString(
-                'en-US'
-              )}{' '}
-              results for "
-              {
-                <span className="term">
-                  {responseContextValue.response.termSearched}
-                </span>
-              }
-              "
+              <span>
+                Found{' '}
+                {responseContextValue.response.dataReceived.count.toLocaleString(
+                  'en-US'
+                )}{' '}
+                results for "
+                {
+                  <span className="term">
+                    {responseContextValue.response.termSearched}
+                  </span>
+                }
+                "
+              </span>
+              <span>{`Page ${
+                responseContextValue.response.pageRequested
+              } of ${Math.ceil(
+                responseContextValue.response.dataReceived.count / 20
+              )}`}</span>
             </div>
             <StyledResults>{renderedItems}</StyledResults>
             <article>

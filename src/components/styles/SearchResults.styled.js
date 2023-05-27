@@ -16,9 +16,14 @@ export const StyledWrapper = styled.div`
   }
 
   .info {
-    padding-bottom: 2rem;
-    color: #7d7d7d;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > span {
+      display: inline-block;
+      padding-bottom: 1.5rem;
+    }
 
     .term {
       font-style: italic;
@@ -30,6 +35,7 @@ export const StyledResults = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 100%);
   gap: 30px;
+  padding-top: 100px;
   padding-bottom: 100px;
 
   @media screen and (min-width: 500px) {
