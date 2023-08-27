@@ -1,5 +1,4 @@
 import React, { useState, useEffect, createContext } from 'react';
-import axios from 'axios';
 import { Outlet, useLocation } from 'react-router-dom';
 import GlobalStyles from '../components/styles/GlobalStyles';
 import GlobalFonts from '../components/styles/GlobalFonts';
@@ -8,6 +7,9 @@ import Navbar from './Navbar';
 import Loader from './Loader';
 import { getResults } from '../apis/rawg';
 
+// - Create context object to share data with other components.
+// - Context value is provided via ResponseContext.Provider
+//   parent wrapper returned from this Layout component.
 export const ResponseContext = createContext(null);
 
 const initialResponse = {
@@ -23,12 +25,15 @@ const Layout = () => {
   const [response, setResponse] = useState(initialResponse);
   const { pathname } = useLocation();
 
+  // - Clear pending status when response is updated.
+  // - isResponsePending is used to show/hide a loading screen.
   useEffect(() => {
     if (isResponsePending === true) {
       setIsResponsePending(false);
     }
   }, [response]);
 
+  // - Changes visibility of navbar based on current Route.
   useEffect(() => {
     if (pathname === '/') {
       setIsNavbarHidden(true);
@@ -37,6 +42,8 @@ const Layout = () => {
     }
   }, [pathname]);
 
+  // - Gets game data to be displayed, based on provided searched term, page number, and
+  //   page number range.
   const updateResponse = async (term, pageNum, pageRange) => {
     const apiResponse = await getResults({ search: term, page: pageNum });
 
@@ -48,6 +55,7 @@ const Layout = () => {
     });
   };
 
+  // - Updates pending status of response.
   const updateIsResponsePending = (status) => {
     setIsResponsePending(status);
   };

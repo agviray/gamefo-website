@@ -4,6 +4,8 @@ import { StyledSquares, StyledLoader } from './styles/Loader.styled';
 const Loader = ({ status, message }) => {
   const [isActive, setIsActive] = useState(status);
 
+  // - Change isActive value.
+  // - Ultimately determines whether the loading screen is shown/hidden.
   useEffect(() => {
     if (status !== isActive) {
       setIsActive(!isActive);
