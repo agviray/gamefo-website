@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const KEY = process.env.REACT_APP_RAWG_KEY;
+// const KEY = ;
 
 const rawg = axios.create({
   baseURL: 'https://api.rawg.io/api',

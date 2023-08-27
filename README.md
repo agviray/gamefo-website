@@ -30,30 +30,31 @@ Feel free to clone and experiment with the code as well. Follow [these steps](#i
 
 ## Installation and Instructions
 
-### Get a RAWG API Key
+#### Step 1 - Get a <em>free</em> RAWG API key.
 
-<em>A RAWG API key is required to locally run this application.</em> You can get a free API key by visiting [RAWG's API docs site](https://rawg.io/apidocs).
-Once you have the key in hand, follow the following installation steps:
+- A RAWG API key is required to locally run this application. You can get a free API key by visiting [RAWG's API docs site](https://rawg.io/apidocs).
 
-#### Step 1 - Clone the repo, then open it in your code editor.
+- Once you are on the site, locate the link/button that will lead you to instructions on how to obtain a free API key.
+
+#### Step 2 - Clone this repo, then open it in your code editor.
 
 ```zsh
 $ git clone https://github.com/agviray/gamefo-website.git
 ```
 
-#### Step 2 - From the app's root directory, install all of the dependencies that are required to run the app.
+#### Step 3 - From the app's root directory, install all of the dependencies that are required to run the app.
 
 ```zsh
 $ npm install
 ```
 
-#### Step 3 - Create an .env file in the root directory of the the app. This will contain your RAWG API key.
+#### Step 4 - Set your RAWG API key as a string value of const KEY, located in the <em>rawg.js</em> file.
 
-#### Step 4 - In the .env file, create an environment variable called, REACT_APP_RAWG_KEY (you do not need to use var, let, or const).
+- You can find the rawg.js file following this path from the root diretory: **src > apis > rawg.js**
 
-#### Step 5 - Set your API key as a string value of REACT_APP_RAWG_KEY.
+- Un-comment const KEY and set it equal to your API key (as a string value).
 
-#### Step 6 - Save your changes, then run the application.
+#### Step 5 - Save your changes, then run the application.
 
 ```zsh
 $ npm start
